@@ -12,8 +12,8 @@ import manual_test as mt
 #import automatic_test as at
 
 OUTPUT_PATH = Path(__file__).parent
-ICON_PATH = OUTPUT_PATH / Path(r"C:\Users\domsp\Desktop\numato_manager\images\icon")
-COVER_PATH = OUTPUT_PATH / Path(r"C:\Users\domsp\Desktop\numato_manager\images\cover")
+ICON_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\icon")
+COVER_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\cover")
 
 def get_icon_path(path: str) -> Path:
     return ICON_PATH / Path(path)
@@ -23,11 +23,11 @@ def get_cover_path(path: str) -> Path:
 
 class NumatoMgr:
     def __init__(self):
-        
+                
         # Main window
         root = Tk()
-        root.title("Numato Manager")                                                   # Title
-        root.iconbitmap(get_icon_path("numato_icon.ico"))                         # Main window icon        
+        root.title("Numato Manager")
+        root.iconbitmap(get_icon_path("numato_icon.ico"))        
         screen_width = 1920
         screen_height = 1080
         root.geometry('{}x{}+{}+{}'.format(screen_width, screen_height, 0, 0))
@@ -35,7 +35,7 @@ class NumatoMgr:
                 
         # Manual Test Button
         self.manual_button_img = PhotoImage(file=get_cover_path("manual.png"))
-        self.manual_button = Button(image=self.manual_button_img, borderwidth=0, highlightthickness=0, command=lambda: mt.on_btn_click, relief="flat", background="#FF0000")
+        self.manual_button = Button(image=self.manual_button_img, borderwidth=0, highlightthickness=0, command=lambda: mt.on_btn_click(root), relief="flat", background="#FF0000")
         self.manual_button.place(x=0.0, y=0.0, width=screen_width//2, height=screen_height)
 
         # Automatic Test Button
