@@ -9,11 +9,17 @@ from pathlib import Path
 from tkinter import Tk, Button, PhotoImage
 
 import manual_test as mt
-#import automatic_test as at
+import automatic_test as at
 
 OUTPUT_PATH = Path(__file__).parent
-ICON_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\icon")
-COVER_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\cover")
+
+# Laptop
+#ICON_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\icon")
+#COVER_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\cover")
+
+# Desktop
+ICON_PATH = OUTPUT_PATH / Path(r"C:\Users\domsp\Desktop\numato_manager\images\icon")
+COVER_PATH = OUTPUT_PATH / Path(r"C:\Users\domsp\Desktop\numato_manager\images\cover")
 
 def get_icon_path(path: str) -> Path:
     return ICON_PATH / Path(path)
@@ -40,7 +46,7 @@ class NumatoMgr:
 
         # Automatic Test Button
         self.auto_button_img = PhotoImage(file=get_cover_path("auto.png"))
-        self.auto_button = Button(image=self.auto_button_img, borderwidth=0, highlightthickness=0, command=lambda: print("auto_button clicked"), relief="flat", background="#0000FF")
+        self.auto_button = Button(image=self.auto_button_img, borderwidth=0, highlightthickness=0, command=lambda: at.on_btn_click(root), relief="flat", background="#0000FF")
         self.auto_button.place(x=screen_width//2, y=0.0, width=screen_width//2, height=screen_height)
 
         self.mainwindow = root

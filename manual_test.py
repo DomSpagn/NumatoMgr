@@ -7,8 +7,14 @@ from tkinter import Tk, Canvas, OptionMenu, Text, Button, Checkbutton, PhotoImag
 import utilities as ut
 
 OUTPUT_PATH = Path(__file__).parent
-PANEL_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\manual\panel")
-TEST_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\manual\test")
+
+# Laptop
+#PANEL_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\manual\panel")
+#TEST_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\manual\test")
+
+# Desktop
+PANEL_PATH = OUTPUT_PATH / Path(r"C:\Users\domsp\Desktop\numato_manager\images\manual\panel")
+TEST_PATH = OUTPUT_PATH / Path(r"C:\Users\domsp\Desktop\numato_manager\images\manual\test")
 
 def get_panel_path(path: str) -> Path:
     return PANEL_PATH / Path(path)
