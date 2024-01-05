@@ -32,24 +32,23 @@ class NumatoMgr:
                 
         # Main window
         root = Tk()
-        root.title("Numato Manager")
-        root.iconbitmap(get_icon_path("numato_icon.ico"))        
-        screen_width = 1920
-        screen_height = 1080
-        root.geometry('{}x{}+{}+{}'.format(screen_width, screen_height, 0, 0))
-        root.configure(bg = "#FFFFFF")
+        self.mainwindow = root        
+        self.mainwindow.title("Numato Manager")
+        self.mainwindow.iconbitmap(get_icon_path("numato_icon.ico"))        
+        self.screen_width = 1920
+        self.screen_height = 1080
+        self.mainwindow.geometry('{}x{}+{}+{}'.format(self.screen_width, self.screen_height, 0, 0))
+        self.mainwindow.configure(bg = "#FFFFFF")
                 
         # Manual Test Button
         self.manual_button_img = PhotoImage(file=get_cover_path("manual.png"))
         self.manual_button = Button(image=self.manual_button_img, borderwidth=0, highlightthickness=0, command=lambda: mt.on_btn_click(root), relief="flat", background="#FF0000")
-        self.manual_button.place(x=0.0, y=0.0, width=screen_width//2, height=screen_height)
+        self.manual_button.place(x=0.0, y=0.0, width=self.screen_width//2, height=self.screen_height)
 
         # Automatic Test Button
         self.auto_button_img = PhotoImage(file=get_cover_path("auto.png"))
         self.auto_button = Button(image=self.auto_button_img, borderwidth=0, highlightthickness=0, command=lambda: at.on_btn_click(root), relief="flat", background="#0000FF")
-        self.auto_button.place(x=screen_width//2, y=0.0, width=screen_width//2, height=screen_height)
-
-        self.mainwindow = root
+        self.auto_button.place(x=self.screen_width//2, y=0.0, width=self.screen_width//2, height=self.screen_height)        
 
     def run(self):
         self.mainwindow.mainloop()
