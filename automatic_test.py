@@ -8,12 +8,12 @@ import utilities as ut
 OUTPUT_PATH = Path(__file__).parent
 
 # Laptop
-#PANEL_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\automatic\panel")
-#TEST_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\automatic\test")
+PANEL_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\automatic\panel")
+TEST_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\automatic\test")
 
 # Desktop
-PANEL_PATH = OUTPUT_PATH / Path(r"C:\Users\domsp\Desktop\numato_manager\images\automatic\panel")
-TEST_PATH = OUTPUT_PATH / Path(r"C:\Users\domsp\Desktop\numato_manager\images\automatic\test")
+#PANEL_PATH = OUTPUT_PATH / Path(r"C:\Users\domsp\Desktop\numato_manager\images\automatic\panel")
+#TEST_PATH = OUTPUT_PATH / Path(r"C:\Users\domsp\Desktop\numato_manager\images\automatic\test")
 
 
 class AutomaticTestPanel:

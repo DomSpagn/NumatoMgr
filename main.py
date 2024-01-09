@@ -14,12 +14,12 @@ import automatic_test as at
 OUTPUT_PATH = Path(__file__).parent
 
 # Laptop
-#ICON_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\icon")
-#COVER_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\cover")
+ICON_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\icon")
+COVER_PATH = OUTPUT_PATH / Path(r"C:\Users\ITDOSPA\Desktop\NumatoMgr\images\cover")
 
 # Desktop
-ICON_PATH = OUTPUT_PATH / Path(r"C:\Users\domsp\Desktop\numato_manager\images\icon")
-COVER_PATH = OUTPUT_PATH / Path(r"C:\Users\domsp\Desktop\numato_manager\images\cover")
+#ICON_PATH = OUTPUT_PATH / Path(r"C:\Users\domsp\Desktop\numato_manager\images\icon")
+#COVER_PATH = OUTPUT_PATH / Path(r"C:\Users\domsp\Desktop\numato_manager\images\cover")
 
 def get_icon_path(path: str) -> Path:
     return ICON_PATH / Path(path)
