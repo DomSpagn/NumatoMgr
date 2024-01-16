@@ -144,7 +144,7 @@ class ManualTestPanel:
         self.canvas.create_rectangle(0, 678.0, 480.0, 678.0, fill="#FF0000", outline="")
 
         # GPIOs Section
-        self.canvas.create_text(199.0, 686.0, anchor="nw", text="GPIOs", fill="#FFFFFF", font=("Inter Black", 28 * -1))
+        self.canvas.create_text(197.0, 686.0, anchor="nw", text="GPIOs", fill="#FFFFFF", font=("Inter Black", 28 * -1))
 
         self.button_img_gpio_0 = PhotoImage(file=self.get_panel_path("gpio_0.png"))
         self.button_gpio_0 = Button(image=self.button_img_gpio_0, borderwidth=0, highlightthickness=0, command=lambda: print("button_gpio_0 clicked"), relief="flat")
@@ -273,9 +273,6 @@ class ManualTestSection:
         self.relay_img_16 = PhotoImage(file=self.get_test_path("open.png"))
         self.relay_16 = self.canvas.create_image(1068.0, 455.0, image=self.relay_img_16)
 
-        # First Line
-        self.canvas.create_rectangle(0, 526.0, 1440.0, 526.0, fill="#000000", outline="")
-
         #GPIOs Section
         self.canvas.create_text(365.0, 568.0, anchor="nw", text="0", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
         self.gpio_img_0 = PhotoImage(file=self.get_test_path("off.png"))
@@ -308,9 +305,6 @@ class ManualTestSection:
         self.canvas.create_text(1060.0, 743.0, anchor="nw", text="7", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
         self.gpio_img_7 = PhotoImage(file=self.get_test_path("off.png"))
         self.gpio_7 = self.canvas.create_image(1068.0, 835.0, image=self.gpio_img_7)
-
-        # Second Line
-        self.canvas.create_rectangle(0, 920.0, 1440.0, 920.0, fill="#000000", outline="")
 
         # Buttons Section
         self.run_img = PhotoImage(file=self.get_test_path("run.png"))

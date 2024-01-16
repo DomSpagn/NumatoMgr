@@ -65,7 +65,7 @@ class AutomaticTestPanel:
         self.select_com_dropdown_menu.bind("<Configure>", self.on_baudrate_select)
 
         # First Blue Line
-        self.canvas.create_rectangle(0, 230.0, 480.0015869140625, 230.0, fill="#0000FF", outline="")
+        self.canvas.create_rectangle(0, 230.0, 480.0, 230.0, fill="#0000FF", outline="")
 
         # Relays Section
         self.canvas.create_text(196.0, 241.0, anchor="nw", text="Relays", fill="#FFFFFF", font=("Inter Black", 28 * -1))
@@ -140,10 +140,10 @@ class AutomaticTestPanel:
         self.button_check_relays.place(x=272, y=493)
 
         # Second Blue Line
-        self.canvas.create_rectangle(0, 550.0, 480.0015869140625, 550.0, fill="#0000FF", outline="")
+        self.canvas.create_rectangle(0, 550.0, 480.0, 550.0, fill="#0000FF", outline="")
 
         # GPIOs Section
-        self.canvas.create_text(199.0, 558.0, anchor="nw", text="GPIOs", fill="#FFFFFF", font=("Inter Black", 28 * -1))
+        self.canvas.create_text(197.0, 558.0, anchor="nw", text="GPIOs", fill="#FFFFFF", font=("Inter Black", 28 * -1))
 
         self.button_img_gpio_0 = PhotoImage(file=self.get_panel_path("gpio_0.png"))
         self.button_gpio_0 = Button(image=self.button_img_gpio_0, borderwidth=0, highlightthickness=0, command=lambda: print("button_gpio_0 clicked"), relief="flat")
@@ -183,14 +183,14 @@ class AutomaticTestPanel:
         self.button_check_relays.place(x=272, y=845)
 
         # Third Blue Line
-        self.canvas.create_rectangle(0, 902.0, 480.0015869140625, 902.0, fill="#0000FF", outline="")
+        self.canvas.create_rectangle(0, 902.0, 480.0, 902.0, fill="#0000FF", outline="")
 
         # Iterations Section
-        self.canvas.create_text(168.0, 912.0, anchor="nw", text="Iterations", fill="#FFFFFF", font=("Inter Black", 28 * -1))
+        self.canvas.create_text(182.0, 912.0, anchor="nw", text="Iterations", fill="#FFFFFF", font=("Inter Black", 28 * -1))
 
-        self.canvas.create_text(159.0, 965.0, anchor="nw", text="Number: ", fill="#FFFFFF", font=("Inter Medium", 19 * -1))
+        self.canvas.create_text(171.0, 965.0, anchor="nw", text="Number: ", fill="#FFFFFF", font=("Inter Medium", 19 * -1))
         self.entry = Entry(bd=0, bg="#FFFFFF", fg="#000716", highlightthickness=0)
-        self.entry.place(x=244.0, y=965.0, width=50.0, height=20.0)
+        self.entry.place(x=256.0, y=965.0, width=50.0, height=20.0)
         
     def get_panel_path(self, path: str) -> Path:
         return PANEL_PATH / Path(path)
@@ -209,8 +209,49 @@ class AutomaticTestPanel:
     def run(self):
         self.mainwindow.mainloop() 
         
+class AutomaticTestSection:
+    def __init__(self, cover_window):        
+        self.mainwindow = cover_window
+
+        # Horizontal Shift
+        self.shift = 480.0
+        
+        self.canvas = Canvas(self.mainwindow, bg = "#0000FF", height = 1017, width = 1440, bd = 0, highlightthickness = 0, relief = "ridge")
+        self.canvas.place(x=0 + self.shift, y=0)
+
+        # Terminal
+        self.terminal_img = PhotoImage(file=self.get_test_path("output_text.png"))
+        self.terminal_bg = self.canvas.create_image(721.0, 264.0, image=self.terminal_img)
+        self.terminal = Entry(bd=0, bg="#000000", fg="#000716", highlightthickness=0)
+        self.terminal.place(x=293.0 + self.shift, y=76.0, width=856.0, height=426.0)
+               
+        # Gauge        
+        self.gauge_img = PhotoImage(file=self.get_test_path("gauge.png"))
+        self.gauge = self.canvas.create_image(720.0, 724.0, image=self.gauge_img)
+        self.canvas.create_text(667.0, 695.0, anchor="nw", text="75%", fill="#FFFFFF", font=("Inter Black", 47 * -1))
+        
+        # Buttons Section
+        self.run_img = PhotoImage(file=self.get_test_path("run.png"))
+        self.run_button = Button(image=self.run_img, borderwidth=0, highlightthickness=0, command=lambda: print("run button clicked"), relief="flat")
+        self.run_button.place(x=450.0 + self.shift, y=944.0, width=161.0, height=50.0)
+
+        self.quit_img = PhotoImage(file=self.get_test_path("quit.png"))
+        self.quit_button = Button(image=self.quit_img, borderwidth=0, highlightthickness=0, command=lambda: print("quit button clicked"), relief="flat")
+        self.quit_button.place(x=641.0 + self.shift, y=944.0, width=161.0, height=50.0)
+
+        self.back_img = PhotoImage(file=self.get_test_path("back.png"))
+        self.back_button = Button(image=self.back_img, borderwidth=0, highlightthickness=0, command=lambda: print("back button clicked"), relief="flat")
+        self.back_button.place(x=832.0 + self.shift, y=944.0, width=161.0, height=50.0)
+
+    def get_test_path(self, path: str) -> Path:
+        return TEST_PATH / Path(path)
+
+    def run(self):
+        self.mainwindow.mainloop()
     
 def on_btn_click(cover_window):
     ut.clear_current_window(cover_window)
     panel = AutomaticTestPanel(cover_window)
+    test = AutomaticTestSection(cover_window)
     panel.run()    
+    test.run()

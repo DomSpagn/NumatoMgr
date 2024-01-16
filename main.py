@@ -36,7 +36,7 @@ class NumatoMgr:
         self.mainwindow.title("Numato Manager")
         self.mainwindow.iconbitmap(get_icon_path("numato_icon.ico"))        
         self.screen_width = 1920
-        self.screen_height = 1080
+        self.screen_height = 1017
         self.mainwindow.geometry('{}x{}+{}+{}'.format(self.screen_width, self.screen_height, 0, 0))
         self.mainwindow.configure(bg = "#FFFFFF")
                 
