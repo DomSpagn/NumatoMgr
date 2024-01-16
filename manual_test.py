@@ -71,67 +71,67 @@ class ManualTestPanel:
         # Relays Section
         self.canvas.create_text(196.0, 349.0, anchor="nw", text="Relays", fill="#FFFFFF", font=("Inter Black", 28 * -1))
 
-        self.button_img_relay_1 = PhotoImage(file=self.get_panel_path("relay_1.png"))
+        self.button_img_relay_1 = PhotoImage(file=self.get_panel_path("relay_1_off.png"))
         self.button_relay_1 = Button(image=self.button_img_relay_1, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_1 clicked"), relief="flat")
-        self.button_relay_1.place(x=166.0, y=425.0, width=30.0, height=30.0)
+        self.button_relay_1.place(x=165.0, y=425.0, width=30.0, height=30.0)
 
-        self.button_img_relay_2 = PhotoImage(file=self.get_panel_path("relay_2.png"))
+        self.button_img_relay_2 = PhotoImage(file=self.get_panel_path("relay_2_off.png"))
         self.button_relay_2 = Button(image=self.button_img_relay_2, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_2 clicked"), relief="flat")
         self.button_relay_2.place(x=205.0, y=425.0, width=30.0, height=30.0)
 
-        self.button_img_relay_3 = PhotoImage(file=self.get_panel_path("relay_3.png"))
+        self.button_img_relay_3 = PhotoImage(file=self.get_panel_path("relay_3_off.png"))
         self.button_relay_3 = Button(image=self.button_img_relay_3, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_3 clicked"), relief="flat")
         self.button_relay_3.place(x=245.0, y=425.0, width=30.0, height=30.0)
 
-        self.button_img_relay_4 = PhotoImage(file=self.get_panel_path("relay_4.png"))
+        self.button_img_relay_4 = PhotoImage(file=self.get_panel_path("relay_4_off.png"))
         self.button_relay_4 = Button(image=self.button_img_relay_4, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_4 clicked"), relief="flat")
         self.button_relay_4.place(x=285.0, y=425.0, width=30.0, height=30.0)
 
-        self.button_img_relay_5 = PhotoImage(file=self.get_panel_path("relay_5.png"))
+        self.button_img_relay_5 = PhotoImage(file=self.get_panel_path("relay_5_off.png"))
         self.button_relay_5 = Button(image=self.button_img_relay_5, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_5 clicked"), relief="flat")
         self.button_relay_5.place(x=165.0, y=465.0, width=30.0, height=30.0)
 
-        self.button_img_relay_6 = PhotoImage(file=self.get_panel_path("relay_6.png"))
+        self.button_img_relay_6 = PhotoImage(file=self.get_panel_path("relay_6_off.png"))
         self.button_relay_6 = Button(image=self.button_img_relay_6, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_6 clicked"), relief="flat")
         self.button_relay_6.place(x=205.0, y=465.0, width=30.0, height=30.0)
 
-        self.button_img_relay_7 = PhotoImage(file=self.get_panel_path("relay_7.png"))
+        self.button_img_relay_7 = PhotoImage(file=self.get_panel_path("relay_7_off.png"))
         self.button_relay_7 = Button(image=self.button_img_relay_7, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_7 clicked"), relief="flat")
         self.button_relay_7.place(x=245.0, y=465.0, width=30.0, height=30.0)
 
-        self.button_img_relay_8 = PhotoImage(file=self.get_panel_path("relay_8.png"))
+        self.button_img_relay_8 = PhotoImage(file=self.get_panel_path("relay_8_off.png"))
         self.button_relay_8 = Button(image=self.button_img_relay_8, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_8 clicked"), relief="flat")
         self.button_relay_8.place(x=285.0, y=465.0, width=30.0, height=30.0)
 
-        self.button_img_relay_9 = PhotoImage(file=self.get_panel_path("relay_9.png"))
+        self.button_img_relay_9 = PhotoImage(file=self.get_panel_path("relay_9_off.png"))
         self.button_relay_9 = Button(image=self.button_img_relay_9, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_9 clicked"), relief="flat")
         self.button_relay_9.place(x=165.0, y=505.0, width=30.0, height=30.0)
 
-        self.button_img_relay_10 = PhotoImage(file=self.get_panel_path("relay_10.png"))
+        self.button_img_relay_10 = PhotoImage(file=self.get_panel_path("relay_10_off.png"))
         self.button_relay_10 = Button(image=self.button_img_relay_10, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_10 clicked"), relief="flat")
         self.button_relay_10.place(x=205.0, y=505.0, width=30.0, height=30.0)
 
-        self.button_img_relay_11 = PhotoImage(file=self.get_panel_path("relay_11.png"))
+        self.button_img_relay_11 = PhotoImage(file=self.get_panel_path("relay_11_off.png"))
         self.button_relay_11 = Button(image=self.button_img_relay_11, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_11 clicked"), relief="flat")
         self.button_relay_11.place(x=245.0, y=505.0, width=30.0, height=30.0)
 
-        self.button_img_relay_12 = PhotoImage(file=self.get_panel_path("relay_12.png"))
+        self.button_img_relay_12 = PhotoImage(file=self.get_panel_path("relay_12_off.png"))
         self.button_relay_12 = Button(image=self.button_img_relay_12, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_12 clicked"), relief="flat")
         self.button_relay_12.place(x=285.0, y=505.0, width=30.0, height=30.0)
 
-        self.button_img_relay_13 = PhotoImage(file=self.get_panel_path("relay_13.png"))
+        self.button_img_relay_13 = PhotoImage(file=self.get_panel_path("relay_13_off.png"))
         self.button_relay_13 = Button(image=self.button_img_relay_13, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_13 clicked"), relief="flat")
         self.button_relay_13.place(x=165.0, y=545.0, width=30.0, height=30.0)
 
-        self.button_img_relay_14 = PhotoImage(file=self.get_panel_path("relay_14.png"))
+        self.button_img_relay_14 = PhotoImage(file=self.get_panel_path("relay_14_off.png"))
         self.button_relay_14 = Button(image=self.button_img_relay_14, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_14 clicked"), relief="flat")
         self.button_relay_14.place(x=205.0, y=545.0, width=30.0, height=30.0)
 
-        self.button_img_relay_15 = PhotoImage(file=self.get_panel_path("relay_15.png"))
+        self.button_img_relay_15 = PhotoImage(file=self.get_panel_path("relay_15_off.png"))
         self.button_relay_15 = Button(image=self.button_img_relay_15, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_15 clicked"), relief="flat")
         self.button_relay_15.place(x=245.0, y=545.0, width=30.0, height=30.0)
 
-        self.button_img_relay_16 = PhotoImage(file=self.get_panel_path("relay_16.png"))
+        self.button_img_relay_16 = PhotoImage(file=self.get_panel_path("relay_16_off.png"))
         self.button_relay_16 = Button(image=self.button_img_relay_16, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_16 clicked"), relief="flat")
         self.button_relay_16.place(x=285.0, y=545.0, width=30.0, height=30.0)
 
@@ -146,35 +146,35 @@ class ManualTestPanel:
         # GPIOs Section
         self.canvas.create_text(197.0, 686.0, anchor="nw", text="GPIOs", fill="#FFFFFF", font=("Inter Black", 28 * -1))
 
-        self.button_img_gpio_0 = PhotoImage(file=self.get_panel_path("gpio_0.png"))
+        self.button_img_gpio_0 = PhotoImage(file=self.get_panel_path("gpio_0_off.png"))
         self.button_gpio_0 = Button(image=self.button_img_gpio_0, borderwidth=0, highlightthickness=0, command=lambda: print("button_gpio_0 clicked"), relief="flat")
         self.button_gpio_0.place(x=147.0, y=824.0, width=36.0, height=36.0)
 
-        self.button_img_gpio_1 = PhotoImage(file=self.get_panel_path("gpio_1.png"))
+        self.button_img_gpio_1 = PhotoImage(file=self.get_panel_path("gpio_1_off.png"))
         self.button_gpio_1 = Button(image=self.button_img_gpio_1, borderwidth=0, highlightthickness=0, command=lambda: print("button_gpio_1 clicked"), relief="flat")
         self.button_gpio_1.place(x=170.0, y=774.0, width=36.0, height=36.0)
 
-        self.button_img_gpio_2 = PhotoImage(file=self.get_panel_path("gpio_2.png"))
+        self.button_img_gpio_2 = PhotoImage(file=self.get_panel_path("gpio_2_off.png"))
         self.button_gpio_2 = Button(image=self.button_img_gpio_2, borderwidth=0, highlightthickness=0, command=lambda: print("button_gpio_2 clicked"), relief="flat")
         self.button_gpio_2.place(x=222.0, y=749.0, width=36.0, height=36.0)
 
-        self.button_img_gpio_3 = PhotoImage(file=self.get_panel_path("gpio_3.png"))
+        self.button_img_gpio_3 = PhotoImage(file=self.get_panel_path("gpio_3_off.png"))
         self.button_gpio_3 = Button(image=self.button_img_gpio_3, borderwidth=0, highlightthickness=0, command=lambda: print("button_gpio_3 clicked"), relief="flat")
         self.button_gpio_3.place(x=271.0, y=774.0, width=36.0, height=36.0)
 
-        self.button_img_gpio_4 = PhotoImage(file=self.get_panel_path("gpio_4.png"))
+        self.button_img_gpio_4 = PhotoImage(file=self.get_panel_path("gpio_4_off.png"))
         self.button_gpio_4 = Button(image=self.button_img_gpio_4, borderwidth=0, highlightthickness=0, command=lambda: print("button_gpio_4 clicked"), relief="flat")
         self.button_gpio_4.place(x=296.0, y=824.0, width=36.0, height=36.0)
 
-        self.button_img_gpio_5 = PhotoImage(file=self.get_panel_path("gpio_5.png"))
+        self.button_img_gpio_5 = PhotoImage(file=self.get_panel_path("gpio_5_off.png"))
         self.button_gpio_5 = Button(image=self.button_img_gpio_5, borderwidth=0, highlightthickness=0, command=lambda: print("button_gpio_5 clicked"), relief="flat")
         self.button_gpio_5.place(x=271.0, y=873.0, width=36.0, height=36.0)
 
-        self.button_img_gpio_6 = PhotoImage(file=self.get_panel_path("gpio_6.png"))
+        self.button_img_gpio_6 = PhotoImage(file=self.get_panel_path("gpio_6_off.png"))
         self.button_gpio_6 = Button(image=self.button_img_gpio_6, borderwidth=0, highlightthickness=0, command=lambda: print("button_gpio_6 clicked"), relief="flat")
         self.button_gpio_6.place(x=222.0, y=899.0, width=36.0, height=36.0)
 
-        self.button_img_gpio_7 = PhotoImage(file=self.get_panel_path("gpio_7.png"))
+        self.button_img_gpio_7 = PhotoImage(file=self.get_panel_path("gpio_7_off.png"))
         self.button_gpio_7 = Button(image=self.button_img_gpio_7, borderwidth=0, highlightthickness=0, command=lambda: print("button_gpio_7 clicked"), relief="flat")
         self.button_gpio_7.place(x=170.0, y=873.0, width=36.0, height=36.0)
 
