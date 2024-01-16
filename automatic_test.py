@@ -24,7 +24,7 @@ class AutomaticTestPanel:
         self.canvas.place(x=0, y=0)
 
         # Serial COM Settings Section
-        self.canvas.create_text(99.0, 11.0, anchor="nw", text="Serial COM Settings", fill="#FFFFFF", font=("Inter Black", 28 * -1))
+        self.canvas.create_text(108.0, 11.0, anchor="nw", text="Serial COM Settings", fill="#FFFFFF", font=("Inter Black", 28 * -1))
 
         # Select COM Dropdown Menu
         self.com_var = StringVar(self.canvas)
@@ -68,7 +68,7 @@ class AutomaticTestPanel:
         self.canvas.create_rectangle(0, 230.0, 480.0015869140625, 230.0, fill="#0000FF", outline="")
 
         # Relays Section
-        self.canvas.create_text(193.0, 241.0, anchor="nw", text="Relays", fill="#FFFFFF", font=("Inter Black", 28 * -1))
+        self.canvas.create_text(196.0, 241.0, anchor="nw", text="Relays", fill="#FFFFFF", font=("Inter Black", 28 * -1))
 
         self.button_img_relay_1 = PhotoImage(file=self.get_panel_path("relay_1.png"))
         self.button_relay_1 = Button(image=self.button_img_relay_1, borderwidth=0, highlightthickness=0, command=lambda: print("button_relay_1 clicked"), relief="flat")
@@ -143,7 +143,7 @@ class AutomaticTestPanel:
         self.canvas.create_rectangle(0, 550.0, 480.0015869140625, 550.0, fill="#0000FF", outline="")
 
         # GPIOs Section
-        self.canvas.create_text(196.0, 558.0, anchor="nw", text="GPIOs", fill="#FFFFFF", font=("Inter Black", 28 * -1))
+        self.canvas.create_text(199.0, 558.0, anchor="nw", text="GPIOs", fill="#FFFFFF", font=("Inter Black", 28 * -1))
 
         self.button_img_gpio_0 = PhotoImage(file=self.get_panel_path("gpio_0.png"))
         self.button_gpio_0 = Button(image=self.button_img_gpio_0, borderwidth=0, highlightthickness=0, command=lambda: print("button_gpio_0 clicked"), relief="flat")
