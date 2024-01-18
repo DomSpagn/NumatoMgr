@@ -42,6 +42,7 @@ class AutomaticTestPanel:
 
         # Relays Section
         self.canvas.create_text(196.0, 241.0, anchor="nw", text="Relays", fill="#FFFFFF", font=("Inter Black", 28 * -1))
+        self.current_image_index = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.set_relay_1_button()
         self.set_relay_2_button()
         self.set_relay_3_button()
@@ -58,15 +59,16 @@ class AutomaticTestPanel:
         self.set_relay_14_button()
         self.set_relay_15_button()
         self.set_relay_16_button()
-        '''
+
         self.canvas.create_text(190.0, 494.0, anchor="nw", text="Select All", fill="#FFFFFF", font=("Inter Medium", 19 * -1))
         self.relays_var = BooleanVar()
-        self.button_check_relays = Checkbutton(self.canvas, bg='#000000', variable=self.relays_var, onvalue=True, offvalue=False, command=lambda: print("relay check box clicked"))
+        self.button_check_relays = Checkbutton(self.canvas, bg='#000000', variable=self.relays_var, onvalue=True, offvalue=False, command=self.manage_all_relays)
         self.button_check_relays.place(x=272, y=493)
 
         # Second Blue Line
         self.canvas.create_rectangle(0, 550.0, 480.0, 550.0, fill="#0000FF", outline="")
 
+        '''
         # GPIOs Section
         self.canvas.create_text(197.0, 558.0, anchor="nw", text="GPIOs", fill="#FFFFFF", font=("Inter Black", 28 * -1))
 
@@ -119,212 +121,219 @@ class AutomaticTestPanel:
         '''
         
     def toggle_relay_1_img(self):
-        self.current_image_index_1 = 1 - self.current_image_index_1
-        new_image = PhotoImage(file=self.image_paths_1[self.current_image_index_1])
+        self.current_image_index[0] = 1 - self.current_image_index[0]
+        new_image = PhotoImage(file=self.image_paths_1[self.current_image_index[0]])
         self.button_relay_1.config(image=new_image)
         self.button_relay_1.image = new_image  # To prevent garbage collection
 
     def set_relay_1_button(self):
-        self.current_image_index_1 = 0
         self.image_paths_1 = [cmn.get_panel_path(self.type, "relay_1_off.png"), cmn.get_panel_path(self.type, "relay_1_on.png")]        
-        self.photo_var_1 = PhotoImage(file=self.image_paths_1[self.current_image_index_1])
+        self.photo_var_1 = PhotoImage(file=self.image_paths_1[self.current_image_index[0]])
         self.button_relay_1 = Button(image=self.photo_var_1, borderwidth=0, highlightthickness=0, command=self.toggle_relay_1_img, relief="flat")
         self.button_relay_1.place(x=165.0, y=306.0, width=30.0, height=30.0)
 
     def toggle_relay_2_img(self):
-        self.current_image_index_2 = 1 - self.current_image_index_2
-        new_image = PhotoImage(file=self.image_paths_2[self.current_image_index_2])
+        self.current_image_index[1] = 1 - self.current_image_index[1]
+        new_image = PhotoImage(file=self.image_paths_2[self.current_image_index[1]])
         self.button_relay_2.config(image=new_image)
         self.button_relay_2.image = new_image  # To prevent garbage collection
 
     def set_relay_2_button(self):
-        self.current_image_index_2 = 0
         self.image_paths_2 = [cmn.get_panel_path(self.type, "relay_2_off.png"), cmn.get_panel_path(self.type, "relay_2_on.png")]        
-        self.photo_var_2 = PhotoImage(file=self.image_paths_2[self.current_image_index_2])
+        self.photo_var_2 = PhotoImage(file=self.image_paths_2[self.current_image_index[1]])
         self.button_relay_2 = Button(image=self.photo_var_2, borderwidth=0, highlightthickness=0, command=self.toggle_relay_2_img, relief="flat")
         self.button_relay_2.place(x=205.0, y=306.0, width=30.0, height=30.0)
 
     def toggle_relay_3_img(self):
-        self.current_image_index_3 = 1 - self.current_image_index_3
-        new_image = PhotoImage(file=self.image_paths_3[self.current_image_index_3])
+        self.current_image_index[2] = 1 - self.current_image_index[2]
+        new_image = PhotoImage(file=self.image_paths_3[self.current_image_index[2]])
         self.button_relay_3.config(image=new_image)
         self.button_relay_3.image = new_image  # To prevent garbage collection
 
     def set_relay_3_button(self):
-        self.current_image_index_3 = 0
         self.image_paths_3 = [cmn.get_panel_path(self.type, "relay_3_off.png"), cmn.get_panel_path(self.type, "relay_3_on.png")]        
-        self.photo_var_3 = PhotoImage(file=self.image_paths_3[self.current_image_index_3])
+        self.photo_var_3 = PhotoImage(file=self.image_paths_3[self.current_image_index[2]])
         self.button_relay_3 = Button(image=self.photo_var_3, borderwidth=0, highlightthickness=0, command=self.toggle_relay_3_img, relief="flat")
         self.button_relay_3.place(x=245.0, y=306.0, width=30.0, height=30.0)
 
     def toggle_relay_4_img(self):
-        self.current_image_index_4 = 1 - self.current_image_index_4
-        new_image = PhotoImage(file=self.image_paths_4[self.current_image_index_4])
+        self.current_image_index[3] = 1 - self.current_image_index[3]
+        new_image = PhotoImage(file=self.image_paths_4[self.current_image_index[3]])
         self.button_relay_4.config(image=new_image)
         self.button_relay_4.image = new_image  # To prevent garbage collection
 
     def set_relay_4_button(self):
-        self.current_image_index_4 = 0
         self.image_paths_4 = [cmn.get_panel_path(self.type, "relay_4_off.png"), cmn.get_panel_path(self.type, "relay_4_on.png")]        
-        self.photo_var_4 = PhotoImage(file=self.image_paths_4[self.current_image_index_4])
+        self.photo_var_4 = PhotoImage(file=self.image_paths_4[self.current_image_index[3]])
         self.button_relay_4 = Button(image=self.photo_var_4, borderwidth=0, highlightthickness=0, command=self.toggle_relay_4_img, relief="flat")
         self.button_relay_4.place(x=285.0, y=306.0, width=30.0, height=30.0)
 
     def toggle_relay_5_img(self):
-        self.current_image_index_5 = 1 - self.current_image_index_5
-        new_image = PhotoImage(file=self.image_paths_5[self.current_image_index_5])
+        self.current_image_index[4] = 1 - self.current_image_index[4]
+        new_image = PhotoImage(file=self.image_paths_5[self.current_image_index[4]])
         self.button_relay_5.config(image=new_image)
         self.button_relay_5.image = new_image  # To prevent garbage collection
 
     def set_relay_5_button(self):
-        self.current_image_index_5 = 0
         self.image_paths_5 = [cmn.get_panel_path(self.type, "relay_5_off.png"), cmn.get_panel_path(self.type, "relay_5_on.png")]        
-        self.photo_var_5 = PhotoImage(file=self.image_paths_5[self.current_image_index_5])
+        self.photo_var_5 = PhotoImage(file=self.image_paths_5[self.current_image_index[4]])
         self.button_relay_5 = Button(image=self.photo_var_5, borderwidth=0, highlightthickness=0, command=self.toggle_relay_5_img, relief="flat")
         self.button_relay_5.place(x=165.0, y=346.0, width=30.0, height=30.0)
 
     def toggle_relay_6_img(self):
-        self.current_image_index_6 = 1 - self.current_image_index_6
-        new_image = PhotoImage(file=self.image_paths_6[self.current_image_index_6])
+        self.current_image_index[5] = 1 - self.current_image_index[5]
+        new_image = PhotoImage(file=self.image_paths_6[self.current_image_index[5]])
         self.button_relay_6.config(image=new_image)
         self.button_relay_6.image = new_image  # To prevent garbage collection
 
     def set_relay_6_button(self):
-        self.current_image_index_6 = 0
         self.image_paths_6 = [cmn.get_panel_path(self.type, "relay_6_off.png"), cmn.get_panel_path(self.type, "relay_6_on.png")]        
-        self.photo_var_6 = PhotoImage(file=self.image_paths_6[self.current_image_index_6])
+        self.photo_var_6 = PhotoImage(file=self.image_paths_6[self.current_image_index[5]])
         self.button_relay_6 = Button(image=self.photo_var_6, borderwidth=0, highlightthickness=0, command=self.toggle_relay_6_img, relief="flat")
         self.button_relay_6.place(x=205.0, y=346.0, width=30.0, height=30.0)
 
     def toggle_relay_7_img(self):
-        self.current_image_index_7 = 1 - self.current_image_index_7
-        new_image = PhotoImage(file=self.image_paths_7[self.current_image_index_7])
+        self.current_image_index[6] = 1 - self.current_image_index[6]
+        new_image = PhotoImage(file=self.image_paths_7[self.current_image_index[6]])
         self.button_relay_7.config(image=new_image)
         self.button_relay_7.image = new_image  # To prevent garbage collection
 
     def set_relay_7_button(self):
-        self.current_image_index_7 = 0
         self.image_paths_7 = [cmn.get_panel_path(self.type, "relay_7_off.png"), cmn.get_panel_path(self.type, "relay_7_on.png")]        
-        self.photo_var_7 = PhotoImage(file=self.image_paths_7[self.current_image_index_7])
+        self.photo_var_7 = PhotoImage(file=self.image_paths_7[self.current_image_index[6]])
         self.button_relay_7 = Button(image=self.photo_var_7, borderwidth=0, highlightthickness=0, command=self.toggle_relay_7_img, relief="flat")
         self.button_relay_7.place(x=245.0, y=346.0, width=30.0, height=30.0)
 
     def toggle_relay_8_img(self):
-        self.current_image_index_8 = 1 - self.current_image_index_8
-        new_image = PhotoImage(file=self.image_paths_8[self.current_image_index_8])
+        self.current_image_index[7] = 1 - self.current_image_index[7]
+        new_image = PhotoImage(file=self.image_paths_8[self.current_image_index[7]])
         self.button_relay_8.config(image=new_image)
         self.button_relay_8.image = new_image  # To prevent garbage collection
 
     def set_relay_8_button(self):
-        self.current_image_index_8 = 0
         self.image_paths_8 = [cmn.get_panel_path(self.type, "relay_8_off.png"), cmn.get_panel_path(self.type, "relay_8_on.png")]        
-        self.photo_var_8 = PhotoImage(file=self.image_paths_8[self.current_image_index_8])
+        self.photo_var_8 = PhotoImage(file=self.image_paths_8[self.current_image_index[7]])
         self.button_relay_8 = Button(image=self.photo_var_8, borderwidth=0, highlightthickness=0, command=self.toggle_relay_8_img, relief="flat")
         self.button_relay_8.place(x=285.0, y=346.0, width=30.0, height=30.0)
 
     def toggle_relay_9_img(self):
-        self.current_image_index_9 = 1 - self.current_image_index_9
-        new_image = PhotoImage(file=self.image_paths_9[self.current_image_index_9])
+        self.current_image_index[8] = 1 - self.current_image_index[8]
+        new_image = PhotoImage(file=self.image_paths_9[self.current_image_index[8]])
         self.button_relay_9.config(image=new_image)
         self.button_relay_9.image = new_image  # To prevent garbage collection
 
     def set_relay_9_button(self):
-        self.current_image_index_9 = 0
         self.image_paths_9 = [cmn.get_panel_path(self.type, "relay_9_off.png"), cmn.get_panel_path(self.type, "relay_9_on.png")]        
-        self.photo_var_9 = PhotoImage(file=self.image_paths_9[self.current_image_index_9])
+        self.photo_var_9 = PhotoImage(file=self.image_paths_9[self.current_image_index[8]])
         self.button_relay_9 = Button(image=self.photo_var_9, borderwidth=0, highlightthickness=0, command=self.toggle_relay_9_img, relief="flat")
         self.button_relay_9.place(x=165.0, y=386.0, width=30.0, height=30.0)
 
     def toggle_relay_10_img(self):
-        self.current_image_index_10 = 1 - self.current_image_index_10
-        new_image = PhotoImage(file=self.image_paths_10[self.current_image_index_10])
+        self.current_image_index[9] = 1 - self.current_image_index[9]
+        new_image = PhotoImage(file=self.image_paths_10[self.current_image_index[9]])
         self.button_relay_10.config(image=new_image)
         self.button_relay_10.image = new_image  # To prevent garbage collection
 
     def set_relay_10_button(self):
-        self.current_image_index_10 = 0
         self.image_paths_10 = [cmn.get_panel_path(self.type, "relay_10_off.png"), cmn.get_panel_path(self.type, "relay_10_on.png")]        
-        self.photo_var_10 = PhotoImage(file=self.image_paths_10[self.current_image_index_10])
+        self.photo_var_10 = PhotoImage(file=self.image_paths_10[self.current_image_index[9]])
         self.button_relay_10 = Button(image=self.photo_var_10, borderwidth=0, highlightthickness=0, command=self.toggle_relay_10_img, relief="flat")
         self.button_relay_10.place(x=205.0, y=386.0, width=30.0, height=30.0)
 
     def toggle_relay_11_img(self):
-        self.current_image_index_11 = 1 - self.current_image_index_11
-        new_image = PhotoImage(file=self.image_paths_11[self.current_image_index_11])
+        self.current_image_index[10] = 1 - self.current_image_index[10]
+        new_image = PhotoImage(file=self.image_paths_11[self.current_image_index[10]])
         self.button_relay_11.config(image=new_image)
         self.button_relay_11.image = new_image  # To prevent garbage collection
 
     def set_relay_11_button(self):
-        self.current_image_index_11 = 0
         self.image_paths_11 = [cmn.get_panel_path(self.type, "relay_11_off.png"), cmn.get_panel_path(self.type, "relay_11_on.png")]        
-        self.photo_var_11 = PhotoImage(file=self.image_paths_11[self.current_image_index_11])
+        self.photo_var_11 = PhotoImage(file=self.image_paths_11[self.current_image_index[10]])
         self.button_relay_11 = Button(image=self.photo_var_11, borderwidth=0, highlightthickness=0, command=self.toggle_relay_11_img, relief="flat")
         self.button_relay_11.place(x=245.0, y=386.0, width=30.0, height=30.0)
 
     def toggle_relay_12_img(self):
-        self.current_image_index_12 = 1 - self.current_image_index_12
-        new_image = PhotoImage(file=self.image_paths_12[self.current_image_index_12])
+        self.current_image_index[11] = 1 - self.current_image_index[11]
+        new_image = PhotoImage(file=self.image_paths_12[self.current_image_index[11]])
         self.button_relay_12.config(image=new_image)
         self.button_relay_12.image = new_image  # To prevent garbage collection
 
     def set_relay_12_button(self):
-        self.current_image_index_12 = 0
         self.image_paths_12 = [cmn.get_panel_path(self.type, "relay_12_off.png"), cmn.get_panel_path(self.type, "relay_12_on.png")]        
-        self.photo_var_12 = PhotoImage(file=self.image_paths_12[self.current_image_index_12])
+        self.photo_var_12 = PhotoImage(file=self.image_paths_12[self.current_image_index[11]])
         self.button_relay_12 = Button(image=self.photo_var_12, borderwidth=0, highlightthickness=0, command=self.toggle_relay_12_img, relief="flat")
         self.button_relay_12.place(x=285.0, y=386.0, width=30.0, height=30.0)
 
     def toggle_relay_13_img(self):
-        self.current_image_index_13 = 1 - self.current_image_index_13
-        new_image = PhotoImage(file=self.image_paths_13[self.current_image_index_13])
+        self.current_image_index[12] = 1 - self.current_image_index[12]
+        new_image = PhotoImage(file=self.image_paths_13[self.current_image_index[12]])
         self.button_relay_13.config(image=new_image)
         self.button_relay_13.image = new_image  # To prevent garbage collection
 
     def set_relay_13_button(self):
-        self.current_image_index_13 = 0
         self.image_paths_13 = [cmn.get_panel_path(self.type, "relay_13_off.png"), cmn.get_panel_path(self.type, "relay_13_on.png")]        
-        self.photo_var_13 = PhotoImage(file=self.image_paths_13[self.current_image_index_13])
+        self.photo_var_13 = PhotoImage(file=self.image_paths_13[self.current_image_index[12]])
         self.button_relay_13 = Button(image=self.photo_var_13, borderwidth=0, highlightthickness=0, command=self.toggle_relay_13_img, relief="flat")
         self.button_relay_13.place(x=165.0, y=426.0, width=30.0, height=30.0)
 
     def toggle_relay_14_img(self):
-        self.current_image_index_14 = 1 - self.current_image_index_14
-        new_image = PhotoImage(file=self.image_paths_14[self.current_image_index_14])
+        self.current_image_index[13] = 1 - self.current_image_index[13]
+        new_image = PhotoImage(file=self.image_paths_14[self.current_image_index[13]])
         self.button_relay_14.config(image=new_image)
         self.button_relay_14.image = new_image  # To prevent garbage collection
 
     def set_relay_14_button(self):
-        self.current_image_index_14 = 0
         self.image_paths_14 = [cmn.get_panel_path(self.type, "relay_14_off.png"), cmn.get_panel_path(self.type, "relay_14_on.png")]        
-        self.photo_var_14 = PhotoImage(file=self.image_paths_14[self.current_image_index_14])
+        self.photo_var_14 = PhotoImage(file=self.image_paths_14[self.current_image_index[13]])
         self.button_relay_14 = Button(image=self.photo_var_14, borderwidth=0, highlightthickness=0, command=self.toggle_relay_14_img, relief="flat")
         self.button_relay_14.place(x=205.0, y=426.0, width=30.0, height=30.0)
 
     def toggle_relay_15_img(self):
-        self.current_image_index_15 = 1 - self.current_image_index_15
-        new_image = PhotoImage(file=self.image_paths_15[self.current_image_index_15])
+        self.current_image_index[14] = 1 - self.current_image_index[14]
+        new_image = PhotoImage(file=self.image_paths_15[self.current_image_index[14]])
         self.button_relay_15.config(image=new_image)
         self.button_relay_15.image = new_image  # To prevent garbage collection
 
     def set_relay_15_button(self):
-        self.current_image_index_15 = 0
         self.image_paths_15 = [cmn.get_panel_path(self.type, "relay_15_off.png"), cmn.get_panel_path(self.type, "relay_15_on.png")]        
-        self.photo_var_15 = PhotoImage(file=self.image_paths_15[self.current_image_index_15])
+        self.photo_var_15 = PhotoImage(file=self.image_paths_15[self.current_image_index[14]])
         self.button_relay_15 = Button(image=self.photo_var_15, borderwidth=0, highlightthickness=0, command=self.toggle_relay_15_img, relief="flat")
         self.button_relay_15.place(x=245.0, y=426.0, width=30.0, height=30.0)
 
     def toggle_relay_16_img(self):
-        self.current_image_index_16 = 1 - self.current_image_index_16
-        new_image = PhotoImage(file=self.image_paths_16[self.current_image_index_16])
+        self.current_image_index[15] = 1 - self.current_image_index[15]
+        new_image = PhotoImage(file=self.image_paths_16[self.current_image_index[15]])
         self.button_relay_16.config(image=new_image)
         self.button_relay_16.image = new_image  # To prevent garbage collection
 
     def set_relay_16_button(self):
-        self.current_image_index_16 = 0
         self.image_paths_16 = [cmn.get_panel_path(self.type, "relay_16_off.png"), cmn.get_panel_path(self.type, "relay_16_on.png")]        
-        self.photo_var_16 = PhotoImage(file=self.image_paths_16[self.current_image_index_16])
+        self.photo_var_16 = PhotoImage(file=self.image_paths_16[self.current_image_index[15]])
         self.button_relay_16 = Button(image=self.photo_var_16, borderwidth=0, highlightthickness=0, command=self.toggle_relay_16_img, relief="flat")
         self.button_relay_16.place(x=285.0, y=426.0, width=30.0, height=30.0)
+
+    def manage_all_relays(self):        
+        if(not self.relays_var.get()):
+            self.current_image_index = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        else:
+            self.current_image_index = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            
+        self.set_relay_1_button()
+        self.set_relay_2_button()
+        self.set_relay_3_button()
+        self.set_relay_4_button()
+        self.set_relay_5_button()
+        self.set_relay_6_button()
+        self.set_relay_7_button()
+        self.set_relay_8_button()
+        self.set_relay_9_button()
+        self.set_relay_10_button()
+        self.set_relay_11_button()
+        self.set_relay_12_button()
+        self.set_relay_13_button()
+        self.set_relay_14_button()
+        self.set_relay_15_button()
+        self.set_relay_16_button()
         
     def run(self):
         self.mainwindow.mainloop() 
