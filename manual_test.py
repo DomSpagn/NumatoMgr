@@ -420,7 +420,8 @@ class ManualTestPanel:
 class ManualTestSection:
     def __init__(self, cover_window):        
         self.mainwindow = cover_window
-
+        self.type = "manual"
+        
         # Horizontal Shift
         self.shift = 480.0
         
@@ -429,112 +430,112 @@ class ManualTestSection:
 
         # Relays Section
         self.canvas.create_text(365.0, 25.0, anchor="nw", text="1", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_1 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_1 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_1 = self.canvas.create_image(372.0, 88.0, image=self.relay_img_1)
 
         self.canvas.create_text(597.0, 25.0, anchor="nw", text="2", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_2 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_2 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_2 = self.canvas.create_image(604.0, 88.0, image=self.relay_img_2)
 
         self.canvas.create_text(828.0, 25.0, anchor="nw", text="3", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_3 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_3 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_3 = self.canvas.create_image(836.0, 88.0, image=self.relay_img_3)
 
         self.canvas.create_text(1060.0, 25.0, anchor="nw", text="4", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_4 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_4 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_4 = self.canvas.create_image(1068.0, 88.0, image=self.relay_img_4)
 
         self.canvas.create_text(365.0, 148.0, anchor="nw", text="5", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_5 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_5 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_5 = self.canvas.create_image(372.0, 211.0, image=self.relay_img_5)
 
         self.canvas.create_text(597.0, 148.0, anchor="nw", text="6", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_6 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_6 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_6 = self.canvas.create_image(604.0, 211.0, image=self.relay_img_6)
 
         self.canvas.create_text(828.0, 148.0, anchor="nw", text="7", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_7 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_7 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_7 = self.canvas.create_image(836.0, 211.0, image=self.relay_img_7)
 
         self.canvas.create_text(1060.0, 148.0, anchor="nw", text="8", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_8 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_8 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_8 = self.canvas.create_image(1068.0, 211.0, image=self.relay_img_8)
 
         self.canvas.create_text(365.0, 270.0, anchor="nw", text="9", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_9 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_9 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_9 = self.canvas.create_image(372.0, 333.0, image=self.relay_img_9)
 
         self.canvas.create_text(589.0, 270.0, anchor="nw", text="10", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_10 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_10 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_10 = self.canvas.create_image(604.0, 333.0, image=self.relay_img_10)
 
         self.canvas.create_text(820.0, 270.0, anchor="nw", text="11", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_11 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_11 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_11 = self.canvas.create_image(836.0, 333.0, image=self.relay_img_11)
 
         self.canvas.create_text(1051.0, 270.0, anchor="nw", text="12", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_12 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_12 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_12 = self.canvas.create_image(1068.0, 333.0, image=self.relay_img_12)
 
         self.canvas.create_text(357.0, 392.0, anchor="nw", text="13", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_13 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_13 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_13 = self.canvas.create_image(372.0, 455.0, image=self.relay_img_13)
 
         self.canvas.create_text(589.0, 392.0, anchor="nw", text="14", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_14 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_14 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_14 = self.canvas.create_image(604.0, 455.0, image=self.relay_img_14)
 
         self.canvas.create_text(820.0, 392.0, anchor="nw", text="15", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_15 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_15 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_15 = self.canvas.create_image(836.0, 455.0, image=self.relay_img_15)
 
         self.canvas.create_text(1051.0, 392.0, anchor="nw", text="16", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.relay_img_16 = PhotoImage(file=cmn.get_test_path("open.png"))
+        self.relay_img_16 = PhotoImage(file=cmn.get_test_path(self.type, "open.png"))
         self.relay_16 = self.canvas.create_image(1068.0, 455.0, image=self.relay_img_16)
 
         #GPIOs Section
         self.canvas.create_text(365.0, 568.0, anchor="nw", text="0", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.gpio_img_0 = PhotoImage(file=cmn.get_test_path("off.png"))
+        self.gpio_img_0 = PhotoImage(file=cmn.get_test_path(self.type, "off.png"))
         self.gpio_0 = self.canvas.create_image(372.0, 659.0, image=self.gpio_img_0)
 
         self.canvas.create_text(597.0, 568.0, anchor="nw", text="1", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.gpio_img_1 = PhotoImage(file=cmn.get_test_path("off.png"))
+        self.gpio_img_1 = PhotoImage(file=cmn.get_test_path(self.type, "off.png"))
         self.gpio_1 = self.canvas.create_image(604.0, 659.0, image=self.gpio_img_1)
 
         self.canvas.create_text(828.0, 568.0, anchor="nw", text="2", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.gpio_img_2 = PhotoImage(file=cmn.get_test_path("off.png"))
+        self.gpio_img_2 = PhotoImage(file=cmn.get_test_path(self.type, "off.png"))
         self.gpio_2 = self.canvas.create_image(836.0, 659.0, image=self.gpio_img_2)
 
         self.canvas.create_text(1060.0, 568.0, anchor="nw", text="3", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.gpio_img_3 = PhotoImage(file=cmn.get_test_path("off.png"))
+        self.gpio_img_3 = PhotoImage(file=cmn.get_test_path(self.type, "off.png"))
         self.gpio_3 = self.canvas.create_image(1068.0, 659.0, image=self.gpio_img_3)
 
         self.canvas.create_text(365.0, 743.0, anchor="nw", text="4", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.gpio_img_4 = PhotoImage(file=cmn.get_test_path("off.png"))
+        self.gpio_img_4 = PhotoImage(file=cmn.get_test_path(self.type, "off.png"))
         self.gpio_4 = self.canvas.create_image(372.0, 835.0, image=self.gpio_img_4)
 
         self.canvas.create_text(597.0, 743.0, anchor="nw", text="5", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.gpio_img_5 = PhotoImage(file=cmn.get_test_path("off.png"))
+        self.gpio_img_5 = PhotoImage(file=cmn.get_test_path(self.type, "off.png"))
         self.gpio_5 = self.canvas.create_image(604.0, 835.0, image=self.gpio_img_5)
 
         self.canvas.create_text(828.0, 743.0, anchor="nw", text="6", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.gpio_img_6 = PhotoImage(file=cmn.get_test_path("off.png"))
+        self.gpio_img_6 = PhotoImage(file=cmn.get_test_path(self.type, "off.png"))
         self.gpio_6 = self.canvas.create_image(836.0, 835.0, image=self.gpio_img_6)
 
         self.canvas.create_text(1060.0, 743.0, anchor="nw", text="7", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
-        self.gpio_img_7 = PhotoImage(file=cmn.get_test_path("off.png"))
+        self.gpio_img_7 = PhotoImage(file=cmn.get_test_path(self.type, "off.png"))
         self.gpio_7 = self.canvas.create_image(1068.0, 835.0, image=self.gpio_img_7)
 
         # Buttons Section
-        self.run_img = PhotoImage(file=cmn.get_test_path("run.png"))
+        self.run_img = PhotoImage(file=cmn.get_test_path(self.type, "run.png"))
         self.run_button = Button(image=self.run_img, borderwidth=0, highlightthickness=0, command=lambda: print("run button clicked"), relief="flat")
         self.run_button.place(x=450.0 + self.shift, y=944.0, width=161.0, height=50.0)
 
-        self.quit_img = PhotoImage(file=cmn.get_test_path("quit.png"))
-        self.quit_button = Button(image=self.quit_img, borderwidth=0, highlightthickness=0, command=lambda: print("quit button clicked"), relief="flat")
+        self.quit_img = PhotoImage(file=cmn.get_test_path(self.type, "quit.png"))
+        self.quit_button = Button(image=self.quit_img, borderwidth=0, highlightthickness=0, command=lambda: cover_window.destroy(), relief="flat")
         self.quit_button.place(x=641.0 + self.shift, y=944.0, width=161.0, height=50.0)
 
-        self.back_img = PhotoImage(file=cmn.get_test_path("back.png"))
+        self.back_img = PhotoImage(file=cmn.get_test_path(self.type, "back.png"))
         self.back_button = Button(image=self.back_img, borderwidth=0, highlightthickness=0, command=lambda: print("back button clicked"), relief="flat")
         self.back_button.place(x=832.0 + self.shift, y=944.0, width=161.0, height=50.0)
         
@@ -544,6 +545,6 @@ class ManualTestSection:
 def on_btn_click(cover_window):
     cmn.clear_current_window(cover_window)
     panel = ManualTestPanel(cover_window)
-    #test = ManualTestSection(cover_window)
+    test = ManualTestSection(cover_window)
     panel.run()
-    #test.run()
+    test.run()

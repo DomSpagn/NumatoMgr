@@ -441,7 +441,8 @@ class AutomaticTestPanel:
 class AutomaticTestSection:
     def __init__(self, cover_window):        
         self.mainwindow = cover_window
-
+        self.type = "auto"
+        
         # Horizontal Shift
         self.shift = 480.0
         
@@ -449,26 +450,26 @@ class AutomaticTestSection:
         self.canvas.place(x=0 + self.shift, y=0)
 
         # Terminal
-        self.terminal_img = PhotoImage(file=cmn.get_test_path("output_text.png"))
+        self.terminal_img = PhotoImage(file=cmn.get_test_path(self.type, "output_text.png"))
         self.terminal_bg = self.canvas.create_image(721.0, 264.0, image=self.terminal_img)
         self.terminal = Entry(bd=0, bg="#000000", fg="#000716", highlightthickness=0)
         self.terminal.place(x=293.0 + self.shift, y=76.0, width=856.0, height=426.0)
                
         # Gauge        
-        self.gauge_img = PhotoImage(file=cmn.get_test_path("gauge.png"))
+        self.gauge_img = PhotoImage(file=cmn.get_test_path(self.type, "gauge.png"))
         self.gauge = self.canvas.create_image(720.0, 724.0, image=self.gauge_img)
         self.canvas.create_text(667.0, 695.0, anchor="nw", text="75%", fill="#FFFFFF", font=("Inter Black", 47 * -1))
         
         # Buttons Section
-        self.run_img = PhotoImage(file=cmn.get_test_path("run.png"))
+        self.run_img = PhotoImage(file=cmn.get_test_path(self.type, "run.png"))
         self.run_button = Button(image=self.run_img, borderwidth=0, highlightthickness=0, command=lambda: print("run button clicked"), relief="flat")
         self.run_button.place(x=450.0 + self.shift, y=944.0, width=161.0, height=50.0)
 
-        self.quit_img = PhotoImage(file=cmn.get_test_path("quit.png"))
-        self.quit_button = Button(image=self.quit_img, borderwidth=0, highlightthickness=0, command=lambda: print("quit button clicked"), relief="flat")
+        self.quit_img = PhotoImage(file=cmn.get_test_path(self.type, "quit.png"))
+        self.quit_button = Button(image=self.quit_img, borderwidth=0, highlightthickness=0, command=lambda: cover_window.destroy(), relief="flat")
         self.quit_button.place(x=641.0 + self.shift, y=944.0, width=161.0, height=50.0)
 
-        self.back_img = PhotoImage(file=cmn.get_test_path("back.png"))
+        self.back_img = PhotoImage(file=cmn.get_test_path(self.type, "back.png"))
         self.back_button = Button(image=self.back_img, borderwidth=0, highlightthickness=0, command=lambda: print("back button clicked"), relief="flat")
         self.back_button.place(x=832.0 + self.shift, y=944.0, width=161.0, height=50.0)
 
@@ -478,6 +479,6 @@ class AutomaticTestSection:
 def on_btn_click(cover_window):
     cmn.clear_current_window(cover_window)
     panel = AutomaticTestPanel(cover_window)
-    #test = AutomaticTestSection(cover_window)
+    test = AutomaticTestSection(cover_window)
     panel.run()    
-    #test.run()
+    test.run()
