@@ -101,6 +101,7 @@ def on_baudrate_select(baudrate_var, *args):
 
 
 # Relays Configuration
+'''
 def set_relay_config(test_class, num, state):
     if(test_class.type == 'manual'):
         match num:
@@ -266,7 +267,7 @@ def set_relay_config(test_class, num, state):
                     test_class.button_img_relay_16 = PhotoImage(file=get_panel_path("auto", "relay_16_off.png"))
                 else:
                     test_class.button_img_relay_16 = PhotoImage(file=get_panel_path("auto", "relay_16_on.png"))
-    
+'''    
 
 # GPIOs Configuration
 '''
