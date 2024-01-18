@@ -1,5 +1,5 @@
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, OptionMenu, Button, PhotoImage, Checkbutton, BooleanVar, StringVar
+from tkinter import Tk, Canvas, Entry, OptionMenu, Button, PhotoImage, Checkbutton, messagebox, BooleanVar, StringVar
 
 import common as cmn
 
@@ -42,6 +42,7 @@ class AutomaticTestPanel:
 
         # Relays Section
         self.canvas.create_text(196.0, 241.0, anchor="nw", text="Relays", fill="#FFFFFF", font=("Inter Black", 28 * -1))
+        
         self.current_relay_img_idx = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.set_relay_1_button()
         self.set_relay_2_button()
@@ -70,6 +71,7 @@ class AutomaticTestPanel:
 
         # GPIOs Section
         self.canvas.create_text(197.0, 558.0, anchor="nw", text="GPIOs", fill="#FFFFFF", font=("Inter Black", 28 * -1))
+        
         self.current_gpio_img_idx = [0, 0, 0, 0, 0, 0, 0, 0]
         self.set_gpio_0_button()
         self.set_gpio_1_button()
@@ -88,14 +90,16 @@ class AutomaticTestPanel:
         # Third Blue Line
         self.canvas.create_rectangle(0, 902.0, 480.0, 902.0, fill="#0000FF", outline="")
 
-        '''
         # Iterations Section
-        self.canvas.create_text(182.0, 912.0, anchor="nw", text="Iterations", fill="#FFFFFF", font=("Inter Black", 28 * -1))
+        self.canvas.create_text(180.0, 912.0, anchor="nw", text="Iterations", fill="#FFFFFF", font=("Inter Black", 28 * -1))
 
-        self.canvas.create_text(171.0, 965.0, anchor="nw", text="Number: ", fill="#FFFFFF", font=("Inter Medium", 19 * -1))
+        self.canvas.create_text(190.0, 965.0, anchor="nw", text="#: ", fill="#FFFFFF", font=("Inter Medium", 19 * -1))
         self.entry = Entry(bd=0, bg="#FFFFFF", fg="#000716", highlightthickness=0)
-        self.entry.place(x=256.0, y=965.0, width=50.0, height=20.0)                           
-        '''
+        self.entry.place(x=214.0, y=965.0, width=50.0, height=20.0)
+        
+        self.save_button_img = PhotoImage(file=cmn.get_panel_path(self.type, "save.png"))
+        self.save_button = Button(image=self.save_button_img, borderwidth=0, highlightthickness=0, command=self.load_iterations_num, relief="flat")
+        self.save_button.place(x=275.0, y=963.0, width=24.0, height=24.0)
         
     def toggle_relay_1_img(self):
         self.current_relay_img_idx[0] = 1 - self.current_relay_img_idx[0]
@@ -290,7 +294,7 @@ class AutomaticTestPanel:
         self.button_relay_16.place(x=285.0, y=426.0, width=30.0, height=30.0)
 
     def manage_all_relays(self):        
-        if(not self.relays_var.get()):
+        if not self.relays_var.get():
             self.current_relay_img_idx = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         else:
             self.current_relay_img_idx = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
@@ -409,7 +413,7 @@ class AutomaticTestPanel:
         self.button_gpio_7.place(x=170.0, y=747.0, width=36.0, height=36.0)
 
     def manage_all_gpios(self):        
-        if(not self.gpios_var.get()):
+        if not self.gpios_var.get():
             self.current_gpio_img_idx = [0, 0, 0, 0, 0, 0, 0, 0]
         else:
             self.current_gpio_img_idx = [1, 1, 1, 1, 1, 1, 1, 1]
@@ -422,6 +426,13 @@ class AutomaticTestPanel:
         self.set_gpio_5_button()
         self.set_gpio_6_button()
         self.set_gpio_7_button()
+        
+    def load_iterations_num(self):
+        input = self.entry.get()
+        if input.isdigit():
+            print("Inserted number: ", self.entry.get())
+        else:
+            messagebox.showerror("Error", "Wrong value")
         
     def run(self):
         self.mainwindow.mainloop() 

@@ -42,6 +42,7 @@ class ManualTestPanel:
 
         # Relays Section
         self.canvas.create_text(196.0, 349.0, anchor="nw", text="Relays", fill="#FFFFFF", font=("Inter Black", 28 * -1))
+        
         self.current_relay_img_idx = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.set_relay_1_button()
         self.set_relay_2_button()
@@ -70,6 +71,7 @@ class ManualTestPanel:
 
         # GPIOs Section
         self.canvas.create_text(197.0, 686.0, anchor="nw", text="GPIOs", fill="#FFFFFF", font=("Inter Black", 28 * -1))
+        
         self.current_gpio_img_idx = [0, 0, 0, 0, 0, 0, 0, 0]
         self.set_gpio_0_button()
         self.set_gpio_1_button()
@@ -278,7 +280,7 @@ class ManualTestPanel:
         self.button_relay_16.place(x=285.0, y=545.0, width=30.0, height=30.0)
     
     def manage_all_relays(self):        
-        if(not self.relays_var.get()):
+        if not self.relays_var.get() :
             self.current_relay_img_idx = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         else:
             self.current_relay_img_idx = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
@@ -397,7 +399,7 @@ class ManualTestPanel:
         self.button_gpio_7.place(x=170.0, y=873.0, width=36.0, height=36.0)
 
     def manage_all_gpios(self):        
-        if(not self.gpios_var.get()):
+        if not self.gpios_var.get():
             self.current_gpio_img_idx = [0, 0, 0, 0, 0, 0, 0, 0]
         else:
             self.current_gpio_img_idx = [1, 1, 1, 1, 1, 1, 1, 1]
