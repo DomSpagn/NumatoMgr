@@ -463,15 +463,11 @@ class AutomaticTestSection:
         # Buttons Section
         self.run_img = PhotoImage(file=cmn.get_test_path(self.type, "run.png"))
         self.run_button = Button(image=self.run_img, borderwidth=0, highlightthickness=0, command=lambda: print("run button clicked"), relief="flat")
-        self.run_button.place(x=450.0 + self.shift, y=944.0, width=161.0, height=50.0)
+        self.run_button.place(x=544.0 + self.shift, y=944.0, width=161.0, height=50.0)
 
         self.quit_img = PhotoImage(file=cmn.get_test_path(self.type, "quit.png"))
         self.quit_button = Button(image=self.quit_img, borderwidth=0, highlightthickness=0, command=lambda: cover_window.destroy(), relief="flat")
-        self.quit_button.place(x=641.0 + self.shift, y=944.0, width=161.0, height=50.0)
-
-        self.back_img = PhotoImage(file=cmn.get_test_path(self.type, "back.png"))
-        self.back_button = Button(image=self.back_img, borderwidth=0, highlightthickness=0, command=lambda: print("back button clicked"), relief="flat")
-        self.back_button.place(x=832.0 + self.shift, y=944.0, width=161.0, height=50.0)
+        self.quit_button.place(x=735.0 + self.shift, y=944.0, width=161.0, height=50.0)
 
     def run(self):
         self.mainwindow.mainloop()
