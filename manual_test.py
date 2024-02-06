@@ -1,6 +1,7 @@
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, OptionMenu, Text, Button, Checkbutton, PhotoImage, StringVar, BooleanVar
 
+import serial
 import common as cmn
 
 
@@ -18,7 +19,6 @@ class ManualTestPanel:
         # Select COM Dropdown Menu
         self.com_var = StringVar(self.canvas)
         self.com_var.set("Select COM")
-        self.com_var.trace('w', lambda *args: cmn.on_com_select(self.com_var, *args))
         self.list_of_active_COMs = cmn.list_serial_ports()
         self.select_com_dropdown_menu = OptionMenu(self.canvas, self.com_var, *self.list_of_active_COMs)
         self.select_com_dropdown_menu.config(width=12, height=1, anchor='center', font=('Inter', 14))
@@ -29,7 +29,6 @@ class ManualTestPanel:
         # Select Baudrate Dropdown Menu
         self.baudrate_var = StringVar(self.canvas)
         self.baudrate_var.set("Select Baudrate")
-        self.baudrate_var.trace('w', lambda *args: cmn.on_baudrate_select(self.baudrate_var, *args))
         self.baudrate_list = cmn.get_baudrate_list()
         self.select_com_dropdown_menu = OptionMenu(self.canvas, self.baudrate_var, *self.baudrate_list)
         self.select_com_dropdown_menu.config(width=12, height=1, anchor='center', font=('Inter', 14))
@@ -418,8 +417,9 @@ class ManualTestPanel:
 
 
 class ManualTestSection:
-    def __init__(self, cover_window):        
+    def __init__(self, cover_window, panel):        
         self.mainwindow = cover_window
+        self.panel = panel
         self.type = "manual"
         
         # Horizontal Shift
@@ -527,20 +527,45 @@ class ManualTestSection:
         self.gpio_7 = self.canvas.create_image(1068.0, 835.0, image=self.gpio_img_7)
 
         # Buttons Section
+        # to do: bisognerebbe inibire il pulsante run se non ci sono tutte le configurazioni impostate, oppure mandare una messagebox se non ci sono tutte le impostazioni
         self.run_img = PhotoImage(file=cmn.get_test_path(self.type, "run.png"))
-        self.run_button = Button(image=self.run_img, borderwidth=0, highlightthickness=0, command=lambda: print("run button clicked"), relief="flat")
+        self.run_button = Button(image=self.run_img, borderwidth=0, highlightthickness=0, command=self.run_manual_test, relief="flat")
         self.run_button.place(x=544.0 + self.shift, y=944.0, width=161.0, height=50.0)
 
         self.quit_img = PhotoImage(file=cmn.get_test_path(self.type, "quit.png"))
         self.quit_button = Button(image=self.quit_img, borderwidth=0, highlightthickness=0, command=lambda: cover_window.destroy(), relief="flat")
         self.quit_button.place(x=735.0 + self.shift, y=944.0, width=161.0, height=50.0)
-       
+    
+    def get_shrinked_com(self):
+        original_str = self.panel.com_var.get()
+        return original_str.replace(' ', '')        
+    
+    def get_shrinked_baudrate(self):
+        original_str = self.panel.baudrate_var.get()
+        baudrate_list = [int(i) for i in original_str.split() if i.isdigit()]
+        return str(baudrate_list[0])
+    
+    def get_timeout(self):
+        return 1
+    
+    def run_manual_test(self):
+        self.com = self.get_shrinked_com()
+        self.baudrate = self.get_shrinked_baudrate()
+        self.timeout = self.get_timeout()
+        self.serialPort = serial.Serial(self.com, self.baudrate, timeout = self.timeout)
+        if not cmn.init_system(self.serialPort):            
+            self.serialPort.close()
+            return
+        
+        print("Serial Communication Complete")
+        self.serialPort.close()
+        
     def run(self):
         self.mainwindow.mainloop()
 
 def on_btn_click(cover_window):
     cmn.clear_current_window(cover_window)
     panel = ManualTestPanel(cover_window)
-    test = ManualTestSection(cover_window)
+    test = ManualTestSection(cover_window, panel)
     panel.run()
     test.run()

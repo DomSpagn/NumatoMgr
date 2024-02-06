@@ -1,6 +1,7 @@
 import tkinter as tk
-from tkinter import ttk, PhotoImage
+from tkinter import ttk, PhotoImage, messagebox
 import serial
+import time
 import sys
 import glob
 
@@ -48,7 +49,7 @@ def get_test_path(type, path: str) -> Path:
         return AUTOMATIC_TEST_PATH / Path(path)
 
 
-# SERIAL COM
+# Serial COM
 def beautify_result(list_in):
     list_out = []
     match len(max(list_in, key = len)):
@@ -62,8 +63,7 @@ def beautify_result(list_in):
             for elem in list_in:
                 list_out.append("    " + elem + "       ")            
         
-    return list_out
-        
+    return list_out       
 
     
 def list_serial_ports():
@@ -85,9 +85,18 @@ def list_serial_ports():
     return beauty_res
 
 
-def on_com_select(com_var, *args):
-    selected_value = com_var.get()
-    print(f"Selected COM: {selected_value}")
+def init_system(serialPort):
+    are_relays_off = init_relays(serialPort)    
+    if not are_relays_off:
+        messagebox.showerror("Error", "Cannot initialize relays")
+        return False
+    
+    are_gpios_off = init_gpios(serialPort)
+    if not are_gpios_off:
+        messagebox.showerror("Error", "Cannot initialize GPIOs")
+        return False
+
+    return True
 
 
 # Baudrate
@@ -95,20 +104,54 @@ def get_baudrate_list():
     return ["   2400 bps  ", "   4800 bps  ", "   9600 bps  ", "   19200 bps  ", "   38400 bps  ", "   57600 bps  ", "   115200 bps  ", "   230400 bps  ", "   460800 bps  ", "   500000 bps  ", "   576000 bps  ", "   921600 bps  ", "  1000000 bps  "]
 
 
-def on_baudrate_select(baudrate_var, *args):
-    selected_value = baudrate_var.get()
-    print(f"Selected baudrate: {selected_value}")
+# Relays
+def init_relays(ser):
+    # set
+    rly_w_all_off_cmd = "relay writeall 0000\r"                             # intialize all relays to OFF
+    ser.write(rly_w_all_off_cmd.encode())
+    time.sleep(0.5)
+    #check
+    rly_r_all_cmd = "relay readall\r"                                   
+    ser.write(rly_r_all_cmd.encode())
+    msg = retrieve_answer(ser.read(45).decode(), 'readall', '0000')
+    if msg != '0000':
+        return False
+    
+    return True
 
 
-'''            
-def get_serial_tout(entry):
-    user_input = entry.get()
+# GPIOs
+def init_gpios(ser):    
+    #set
+    for gpio_idx in '01234567':
+        gpio_w_low_cmd = "gpio clear " + gpio_idx + '\r'                    # set to LOW single GPIO output state
+        ser.write(gpio_w_low_cmd.encode())
+        time.sleep(0.1)                                                     # wait for 100 ms
+        gpio_r_cmd = "gpio read " + gpio_idx + '\r'                         # set to LOW single GPIO output state        
+        ser.write(gpio_r_cmd.encode())
+        msg = retrieve_answer(ser.read(50).decode(), 'read', '0')
+        if msg != '0':
+            return False
+        
+    return True
+
+
+# General
+def retrieve_answer(serial_answer, ref_word, expected_answer):
+    # Find the index of the ref_word (reference word)
+    ref_word_idx = serial_answer.find(ref_word)
     
-    
-def select_serial_timeout(current_window):
-    try:
-        tout_text = Label(current_window, text = 'timeout: ')
-        tout_text.place(x = 200, y = 150)
-    except:
-        create_debug_window(current_window, 'get_serial_timeout')
-'''    
+    # Check if the ref_word has been found
+    if ref_word_idx != -1:
+        # Find the index of the expected answer after the reference word
+        expected_answer_idx = serial_answer.find(expected_answer, ref_word_idx + len(ref_word))
+        
+        # Check if the expected answer has been found
+        if expected_answer_idx != -1:
+            # Return the expected answer
+            return serial_answer[expected_answer_idx:expected_answer_idx + len(expected_answer)]
+            
+        else:
+            return ""
+    else:
+        return ""
