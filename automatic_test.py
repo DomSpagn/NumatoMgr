@@ -82,6 +82,11 @@ class AutomaticTestPanel:
         self.set_gpio_6_button()
         self.set_gpio_7_button()
 
+        self.canvas.create_text(238.0, 681.0, anchor="n", text="+/-", fill="#FFFFFF", font=("Inter Medium", 19 * -1))
+        self.negative_logic_var = BooleanVar()
+        self.button_check_relays = Checkbutton(self.canvas, bg='#000000', variable=self.negative_logic_var, onvalue=True, offvalue=False, command=self.set_negative_logic)
+        self.button_check_relays.place(x=228, y=702)
+
         self.canvas.create_text(190.0, 846.0, anchor="nw", text="Select All", fill="#FFFFFF", font=("Inter Medium", 19 * -1))
         self.gpios_var = BooleanVar()
         self.button_check_relays = Checkbutton(self.canvas, bg='#000000', variable=self.gpios_var, onvalue=True, offvalue=False, command=self.manage_all_gpios)
@@ -292,6 +297,12 @@ class AutomaticTestPanel:
         self.photo_var_relay_16 = PhotoImage(file=self.img_paths_relay_16[self.current_relay_img_idx[15]])
         self.button_relay_16 = Button(image=self.photo_var_relay_16, borderwidth=0, highlightthickness=0, command=self.toggle_relay_16_img, relief="flat")
         self.button_relay_16.place(x=285.0, y=426.0, width=30.0, height=30.0)
+
+    def set_negative_logic(self):
+        if not self.negative_logic_var.get():
+            print("Positive")
+        else:
+            print("Negative")
 
     def manage_all_relays(self):        
         if not self.relays_var.get():

@@ -81,11 +81,16 @@ class ManualTestPanel:
         self.set_gpio_6_button()
         self.set_gpio_7_button()
         
+        self.canvas.create_text(238.0, 807.0, anchor="n", text="+/-", fill="#FFFFFF", font=("Inter Medium", 19 * -1))
+        self.negative_logic_var = BooleanVar()
+        self.button_check_relays = Checkbutton(self.canvas, bg='#000000', variable=self.negative_logic_var, onvalue=True, offvalue=False, command=self.set_negative_logic)
+        self.button_check_relays.place(x=228, y=828)
+
         self.canvas.create_text(190.0, 968.0, anchor="nw", text="Select All", fill="#FFFFFF", font=("Inter Medium", 19 * -1))
         self.gpios_var = BooleanVar()
         self.button_check_relays = Checkbutton(self.canvas, bg='#000000', variable=self.gpios_var, onvalue=True, offvalue=False, command=self.manage_all_gpios)
         self.button_check_relays.place(x=272, y=967)
-        
+       
     def toggle_relay_1_img(self):
         self.current_relay_img_idx[0] = 1 - self.current_relay_img_idx[0]
         new_image = PhotoImage(file=self.img_paths_relay_1[self.current_relay_img_idx[0]])
@@ -396,6 +401,12 @@ class ManualTestPanel:
         self.photo_var_gpio_7 = PhotoImage(file=self.img_paths_gpio_7[self.current_gpio_img_idx[7]])
         self.button_gpio_7 = Button(image=self.photo_var_gpio_7, borderwidth=0, highlightthickness=0, command=self.toggle_gpio_7_img, relief="flat")
         self.button_gpio_7.place(x=170.0, y=873.0, width=36.0, height=36.0)
+
+    def set_negative_logic(self):
+        if not self.negative_logic_var.get():
+            print("Positive")
+        else:
+            print("Negative")
 
     def manage_all_gpios(self):        
         if not self.gpios_var.get():
