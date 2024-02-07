@@ -41,7 +41,7 @@ class ManualTestPanel:
         self.canvas.create_rectangle(0, 339.0, 480.0, 339.0, fill="#FF0000", outline="")
 
         # Relays Section
-        self.is_relay_selected = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
+        self.is_relay_selected = [False] * 16
         self.canvas.create_text(196.0, 349.0, anchor="nw", text="Relays", fill="#FFFFFF", font=("Inter Black", 28 * -1))
         
         self.current_relay_img_idx = [0] * 16
@@ -71,7 +71,7 @@ class ManualTestPanel:
         self.canvas.create_rectangle(0, 678.0, 480.0, 678.0, fill="#FF0000", outline="")
 
         # GPIOs Section
-        self.is_gpio_selected = [False, False, False, False, False, False, False, False]
+        self.is_gpio_selected = [False] * 8
         self.canvas.create_text(197.0, 686.0, anchor="nw", text="GPIOs", fill="#FFFFFF", font=("Inter Black", 28 * -1))
         
         self.current_gpio_img_idx = [0] * 8
@@ -306,10 +306,10 @@ class ManualTestPanel:
     def manage_all_relays(self):        
         if not self.relays_var.get() :
             self.is_relay_selected = [False] * 16
-            self.current_relay_img_idx = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            self.current_relay_img_idx = [0] * 16
         else:
             self.is_relay_selected = [True] * 16
-            self.current_relay_img_idx = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            self.current_relay_img_idx = [1] * 16
             
         self.set_relay_1_button()
         self.set_relay_2_button()
@@ -636,7 +636,7 @@ class ManualTestSection:
         self.com = self.get_shrinked_com()
         self.baudrate = self.get_shrinked_baudrate()
         self.timeout = self.get_timeout()
-               
+              
         if not any(self.panel.is_relay_selected):
             messagebox.showerror("Error", "No relay has been selected")
             return
@@ -655,13 +655,14 @@ class ManualTestSection:
             self.serialPort.close()
             
             if self.panel.negative_logic_var.get():
-                self.invert_gpios_init_condition()
-                
+                self.invert_gpios_init_condition()                
         except:            
             if self.com == "SelectCOM":
                 messagebox.showerror("Error", "COM not selected")
             elif self.baudrate == "Select Baudrate":
                 messagebox.showerror("Error", "Baudrate not selected")
+            else:
+                messagebox.showerror("Error", "General Error")
         
     def run(self):
         self.mainwindow.mainloop()

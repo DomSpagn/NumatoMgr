@@ -1,6 +1,7 @@
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, OptionMenu, Button, PhotoImage, Checkbutton, messagebox, BooleanVar, StringVar
 
+import serial
 import common as cmn
 
 
@@ -18,8 +19,7 @@ class AutomaticTestPanel:
 
         # Select COM Dropdown Menu
         self.com_var = StringVar(self.canvas)
-        self.com_var.set("Select COM")
-        self.com_var.trace('w', lambda *args: cmn.on_com_select(self.com_var, *args))
+        self.com_var.set("Select COM")        
         self.list_of_active_COMs = cmn.list_serial_ports()
         self.select_com_dropdown_menu = OptionMenu(self.canvas, self.com_var, *self.list_of_active_COMs)
         self.select_com_dropdown_menu.config(width=12, height=1, anchor='center', font=('Inter', 14))
@@ -29,8 +29,7 @@ class AutomaticTestPanel:
 
         # Select Baudrate Dropdown Menu
         self.baudrate_var = StringVar(self.canvas)
-        self.baudrate_var.set("Select Baudrate")
-        self.baudrate_var.trace('w', lambda *args: cmn.on_baudrate_select(self.baudrate_var, *args))
+        self.baudrate_var.set("Select Baudrate")        
         self.baudrate_list = cmn.get_baudrate_list()
         self.select_com_dropdown_menu = OptionMenu(self.canvas, self.baudrate_var, *self.baudrate_list)
         self.select_com_dropdown_menu.config(width=12, height=1, anchor='center', font=('Inter', 14))  # Impostazione larghezza e altezza del bottone
@@ -42,9 +41,10 @@ class AutomaticTestPanel:
         self.canvas.create_rectangle(0, 230.0, 480.0, 230.0, fill="#0000FF", outline="")
 
         # Relays Section
+        self.is_relay_selected = [False] * 16
         self.canvas.create_text(196.0, 241.0, anchor="nw", text="Relays", fill="#FFFFFF", font=("Inter Black", 28 * -1))
         
-        self.current_relay_img_idx = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.current_relay_img_idx = [0] * 16
         self.set_relay_1_button()
         self.set_relay_2_button()
         self.set_relay_3_button()
@@ -71,9 +71,10 @@ class AutomaticTestPanel:
         self.canvas.create_rectangle(0, 550.0, 480.0, 550.0, fill="#0000FF", outline="")
 
         # GPIOs Section
+        self.is_gpio_selected = [False] * 8
         self.canvas.create_text(197.0, 558.0, anchor="nw", text="GPIOs", fill="#FFFFFF", font=("Inter Black", 28 * -1))
         
-        self.current_gpio_img_idx = [0, 0, 0, 0, 0, 0, 0, 0]
+        self.current_gpio_img_idx = [0] * 8
         self.set_gpio_0_button()
         self.set_gpio_1_button()
         self.set_gpio_2_button()
@@ -103,13 +104,10 @@ class AutomaticTestPanel:
         self.entry = Entry(bd=0, bg="#FFFFFF", fg="#000716", highlightthickness=0)
         self.entry.place(x=214.0, y=965.0, width=50.0, height=20.0)
         
-        self.save_button_img = PhotoImage(file=cmn.get_panel_path(self.type, "save.png"))
-        self.save_button = Button(image=self.save_button_img, borderwidth=0, highlightthickness=0, command=self.load_iterations_num, relief="flat")
-        self.save_button.place(x=275.0, y=963.0, width=24.0, height=24.0)
-
     # Manage relays
     def toggle_relay_1_img(self):
         self.current_relay_img_idx[0] = 1 - self.current_relay_img_idx[0]
+        self.is_relay_selected[0] = True if self.current_relay_img_idx[0] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_1[self.current_relay_img_idx[0]])
         self.button_relay_1.config(image=new_image)
         self.button_relay_1.image = new_image  # To prevent garbage collection
@@ -122,6 +120,7 @@ class AutomaticTestPanel:
 
     def toggle_relay_2_img(self):
         self.current_relay_img_idx[1] = 1 - self.current_relay_img_idx[1]
+        self.is_relay_selected[1] = True if self.current_relay_img_idx[1] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_2[self.current_relay_img_idx[1]])
         self.button_relay_2.config(image=new_image)
         self.button_relay_2.image = new_image  # To prevent garbage collection
@@ -134,6 +133,7 @@ class AutomaticTestPanel:
 
     def toggle_relay_3_img(self):
         self.current_relay_img_idx[2] = 1 - self.current_relay_img_idx[2]
+        self.is_relay_selected[2] = True if self.current_relay_img_idx[2] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_3[self.current_relay_img_idx[2]])
         self.button_relay_3.config(image=new_image)
         self.button_relay_3.image = new_image  # To prevent garbage collection
@@ -146,6 +146,7 @@ class AutomaticTestPanel:
 
     def toggle_relay_4_img(self):
         self.current_relay_img_idx[3] = 1 - self.current_relay_img_idx[3]
+        self.is_relay_selected[3] = True if self.current_relay_img_idx[3] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_4[self.current_relay_img_idx[3]])
         self.button_relay_4.config(image=new_image)
         self.button_relay_4.image = new_image  # To prevent garbage collection
@@ -158,6 +159,7 @@ class AutomaticTestPanel:
 
     def toggle_relay_5_img(self):
         self.current_relay_img_idx[4] = 1 - self.current_relay_img_idx[4]
+        self.is_relay_selected[4] = True if self.current_relay_img_idx[4] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_5[self.current_relay_img_idx[4]])
         self.button_relay_5.config(image=new_image)
         self.button_relay_5.image = new_image  # To prevent garbage collection
@@ -170,6 +172,7 @@ class AutomaticTestPanel:
 
     def toggle_relay_6_img(self):
         self.current_relay_img_idx[5] = 1 - self.current_relay_img_idx[5]
+        self.is_relay_selected[5] = True if self.current_relay_img_idx[5] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_6[self.current_relay_img_idx[5]])
         self.button_relay_6.config(image=new_image)
         self.button_relay_6.image = new_image  # To prevent garbage collection
@@ -182,6 +185,7 @@ class AutomaticTestPanel:
 
     def toggle_relay_7_img(self):
         self.current_relay_img_idx[6] = 1 - self.current_relay_img_idx[6]
+        self.is_relay_selected[6] = True if self.current_relay_img_idx[6] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_7[self.current_relay_img_idx[6]])
         self.button_relay_7.config(image=new_image)
         self.button_relay_7.image = new_image  # To prevent garbage collection
@@ -194,6 +198,7 @@ class AutomaticTestPanel:
 
     def toggle_relay_8_img(self):
         self.current_relay_img_idx[7] = 1 - self.current_relay_img_idx[7]
+        self.is_relay_selected[7] = True if self.current_relay_img_idx[7] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_8[self.current_relay_img_idx[7]])
         self.button_relay_8.config(image=new_image)
         self.button_relay_8.image = new_image  # To prevent garbage collection
@@ -206,6 +211,7 @@ class AutomaticTestPanel:
 
     def toggle_relay_9_img(self):
         self.current_relay_img_idx[8] = 1 - self.current_relay_img_idx[8]
+        self.is_relay_selected[8] = True if self.current_relay_img_idx[8] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_9[self.current_relay_img_idx[8]])
         self.button_relay_9.config(image=new_image)
         self.button_relay_9.image = new_image  # To prevent garbage collection
@@ -218,6 +224,7 @@ class AutomaticTestPanel:
 
     def toggle_relay_10_img(self):
         self.current_relay_img_idx[9] = 1 - self.current_relay_img_idx[9]
+        self.is_relay_selected[9] = True if self.current_relay_img_idx[9] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_10[self.current_relay_img_idx[9]])
         self.button_relay_10.config(image=new_image)
         self.button_relay_10.image = new_image  # To prevent garbage collection
@@ -230,6 +237,7 @@ class AutomaticTestPanel:
 
     def toggle_relay_11_img(self):
         self.current_relay_img_idx[10] = 1 - self.current_relay_img_idx[10]
+        self.is_relay_selected[10] = True if self.current_relay_img_idx[10] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_11[self.current_relay_img_idx[10]])
         self.button_relay_11.config(image=new_image)
         self.button_relay_11.image = new_image  # To prevent garbage collection
@@ -242,6 +250,7 @@ class AutomaticTestPanel:
 
     def toggle_relay_12_img(self):
         self.current_relay_img_idx[11] = 1 - self.current_relay_img_idx[11]
+        self.is_relay_selected[11] = True if self.current_relay_img_idx[11] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_12[self.current_relay_img_idx[11]])
         self.button_relay_12.config(image=new_image)
         self.button_relay_12.image = new_image  # To prevent garbage collection
@@ -254,6 +263,7 @@ class AutomaticTestPanel:
 
     def toggle_relay_13_img(self):
         self.current_relay_img_idx[12] = 1 - self.current_relay_img_idx[12]
+        self.is_relay_selected[12] = True if self.current_relay_img_idx[12] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_13[self.current_relay_img_idx[12]])
         self.button_relay_13.config(image=new_image)
         self.button_relay_13.image = new_image  # To prevent garbage collection
@@ -266,6 +276,7 @@ class AutomaticTestPanel:
 
     def toggle_relay_14_img(self):
         self.current_relay_img_idx[13] = 1 - self.current_relay_img_idx[13]
+        self.is_relay_selected[13] = True if self.current_relay_img_idx[13] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_14[self.current_relay_img_idx[13]])
         self.button_relay_14.config(image=new_image)
         self.button_relay_14.image = new_image  # To prevent garbage collection
@@ -278,6 +289,7 @@ class AutomaticTestPanel:
 
     def toggle_relay_15_img(self):
         self.current_relay_img_idx[14] = 1 - self.current_relay_img_idx[14]
+        self.is_relay_selected[14] = True if self.current_relay_img_idx[14] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_15[self.current_relay_img_idx[14]])
         self.button_relay_15.config(image=new_image)
         self.button_relay_15.image = new_image  # To prevent garbage collection
@@ -290,6 +302,7 @@ class AutomaticTestPanel:
 
     def toggle_relay_16_img(self):
         self.current_relay_img_idx[15] = 1 - self.current_relay_img_idx[15]
+        self.is_relay_selected[15] = True if self.current_relay_img_idx[15] == 1 else False
         new_image = PhotoImage(file=self.img_paths_relay_16[self.current_relay_img_idx[15]])
         self.button_relay_16.config(image=new_image)
         self.button_relay_16.image = new_image  # To prevent garbage collection
@@ -302,9 +315,11 @@ class AutomaticTestPanel:
 
     def manage_all_relays(self):        
         if not self.relays_var.get():
-            self.current_relay_img_idx = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            self.is_relay_selected = [False] * 16
+            self.current_relay_img_idx = [0] * 16
         else:
-            self.current_relay_img_idx = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            self.is_relay_selected = [True] * 16
+            self.current_relay_img_idx = [1] * 16
             
         self.set_relay_1_button()
         self.set_relay_2_button()
@@ -326,6 +341,7 @@ class AutomaticTestPanel:
     # Manage GPIOs
     def toggle_gpio_0_img(self):
         self.current_gpio_img_idx[0] = 1 - self.current_gpio_img_idx[0]
+        self.is_gpio_selected[0] = True if self.current_gpio_img_idx[0] == 1 else False
         new_image = PhotoImage(file=self.img_paths_gpio_0[self.current_gpio_img_idx[0]])
         self.button_gpio_0.config(image=new_image)
         self.button_gpio_0.image = new_image  # To prevent garbage collection
@@ -338,6 +354,7 @@ class AutomaticTestPanel:
 
     def toggle_gpio_1_img(self):
         self.current_gpio_img_idx[1] = 1 - self.current_gpio_img_idx[1]
+        self.is_gpio_selected[1] = True if self.current_gpio_img_idx[1] == 1 else False
         new_image = PhotoImage(file=self.img_paths_gpio_1[self.current_gpio_img_idx[1]])
         self.button_gpio_1.config(image=new_image)
         self.button_gpio_1.image = new_image  # To prevent garbage collection
@@ -350,6 +367,7 @@ class AutomaticTestPanel:
 
     def toggle_gpio_2_img(self):
         self.current_gpio_img_idx[2] = 1 - self.current_gpio_img_idx[2]
+        self.is_gpio_selected[2] = True if self.current_gpio_img_idx[2] == 1 else False
         new_image = PhotoImage(file=self.img_paths_gpio_2[self.current_gpio_img_idx[2]])
         self.button_gpio_2.config(image=new_image)
         self.button_gpio_2.image = new_image  # To prevent garbage collection
@@ -362,6 +380,7 @@ class AutomaticTestPanel:
 
     def toggle_gpio_3_img(self):
         self.current_gpio_img_idx[3] = 1 - self.current_gpio_img_idx[3]
+        self.is_gpio_selected[3] = True if self.current_gpio_img_idx[3] == 1 else False
         new_image = PhotoImage(file=self.img_paths_gpio_3[self.current_gpio_img_idx[3]])
         self.button_gpio_3.config(image=new_image)
         self.button_gpio_3.image = new_image  # To prevent garbage collection
@@ -374,6 +393,7 @@ class AutomaticTestPanel:
 
     def toggle_gpio_4_img(self):
         self.current_gpio_img_idx[4] = 1 - self.current_gpio_img_idx[4]
+        self.is_gpio_selected[4] = True if self.current_gpio_img_idx[4] == 1 else False
         new_image = PhotoImage(file=self.img_paths_gpio_4[self.current_gpio_img_idx[4]])
         self.button_gpio_4.config(image=new_image)
         self.button_gpio_4.image = new_image  # To prevent garbage collection
@@ -386,6 +406,7 @@ class AutomaticTestPanel:
 
     def toggle_gpio_5_img(self):
         self.current_gpio_img_idx[5] = 1 - self.current_gpio_img_idx[5]
+        self.is_gpio_selected[5] = True if self.current_gpio_img_idx[5] == 1 else False
         new_image = PhotoImage(file=self.img_paths_gpio_5[self.current_gpio_img_idx[5]])
         self.button_gpio_5.config(image=new_image)
         self.button_gpio_5.image = new_image  # To prevent garbage collection
@@ -398,6 +419,7 @@ class AutomaticTestPanel:
 
     def toggle_gpio_6_img(self):
         self.current_gpio_img_idx[6] = 1 - self.current_gpio_img_idx[6]
+        self.is_gpio_selected[6] = True if self.current_gpio_img_idx[6] == 1 else False
         new_image = PhotoImage(file=self.img_paths_gpio_6[self.current_gpio_img_idx[6]])
         self.button_gpio_6.config(image=new_image)
         self.button_gpio_6.image = new_image  # To prevent garbage collection
@@ -410,6 +432,7 @@ class AutomaticTestPanel:
 
     def toggle_gpio_7_img(self):
         self.current_gpio_img_idx[7] = 1 - self.current_gpio_img_idx[7]
+        self.is_gpio_selected[7] = True if self.current_gpio_img_idx[7] == 1 else False
         new_image = PhotoImage(file=self.img_paths_gpio_7[self.current_gpio_img_idx[7]])
         self.button_gpio_7.config(image=new_image)
         self.button_gpio_7.image = new_image  # To prevent garbage collection
@@ -428,9 +451,11 @@ class AutomaticTestPanel:
 
     def manage_all_gpios(self):        
         if not self.gpios_var.get():
-            self.current_gpio_img_idx = [0, 0, 0, 0, 0, 0, 0, 0]
+            self.is_gpio_selected = [False] * 8
+            self.current_gpio_img_idx = [0] * 8
         else:
-            self.current_gpio_img_idx = [1, 1, 1, 1, 1, 1, 1, 1]
+            self.is_gpio_selected = [True] * 8
+            self.current_gpio_img_idx = [1] * 8
             
         self.set_gpio_0_button()
         self.set_gpio_1_button()
@@ -440,23 +465,16 @@ class AutomaticTestPanel:
         self.set_gpio_5_button()
         self.set_gpio_6_button()
         self.set_gpio_7_button()
-    
-    # Manage iterations    
-    def load_iterations_num(self):
-        input = self.entry.get()
-        if input.isdigit():
-            print("Inserted number: ", self.entry.get())
-        else:
-            messagebox.showerror("Error", "Wrong value")
-        
+           
     def run(self):
         self.mainwindow.mainloop() 
 
         
 class AutomaticTestSection:
     # GUI
-    def __init__(self, cover_window):        
+    def __init__(self, cover_window, panel):        
         self.mainwindow = cover_window
+        self.panel = panel
         self.type = "auto"
         
         # Horizontal Shift
@@ -478,7 +496,7 @@ class AutomaticTestSection:
         
         # Buttons Section
         self.run_img = PhotoImage(file=cmn.get_test_path(self.type, "run.png"))
-        self.run_button = Button(image=self.run_img, borderwidth=0, highlightthickness=0, command=lambda: print("run button clicked"), relief="flat")
+        self.run_button = Button(image=self.run_img, borderwidth=0, highlightthickness=0, command=self.run_automatic_test, relief="flat")
         self.run_button.place(x=544.0 + self.shift, y=944.0, width=161.0, height=50.0)
 
         self.quit_img = PhotoImage(file=cmn.get_test_path(self.type, "quit.png"))
@@ -486,14 +504,104 @@ class AutomaticTestSection:
         self.quit_button.place(x=735.0 + self.shift, y=944.0, width=161.0, height=50.0)
 
     # Callbacks
+    def get_shrinked_com(self):
+        original_str = self.panel.com_var.get()
+        return original_str.replace(' ', '')        
+    
+    def get_shrinked_baudrate(self):        
+        original_str = self.panel.baudrate_var.get()
+        
+        if(original_str == "Select Baudrate"):
+            return original_str
+        
+        baudrate_list = [int(i) for i in original_str.split() if i.isdigit()]
+        return str(baudrate_list[0])
+    
+    def get_timeout(self):
+        return 1
+       
+    def invert_gpios_init_condition(self):
+        self.canvas.create_text(365.0, 568.0, anchor="nw", text="0", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
+        self.gpio_img_0 = PhotoImage(file=cmn.get_test_path(self.type, "on.png"))
+        self.gpio_0 = self.canvas.create_image(372.0, 659.0, image=self.gpio_img_0)
+
+        self.canvas.create_text(597.0, 568.0, anchor="nw", text="1", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
+        self.gpio_img_1 = PhotoImage(file=cmn.get_test_path(self.type, "on.png"))
+        self.gpio_1 = self.canvas.create_image(604.0, 659.0, image=self.gpio_img_1)
+
+        self.canvas.create_text(828.0, 568.0, anchor="nw", text="2", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
+        self.gpio_img_2 = PhotoImage(file=cmn.get_test_path(self.type, "on.png"))
+        self.gpio_2 = self.canvas.create_image(836.0, 659.0, image=self.gpio_img_2)
+
+        self.canvas.create_text(1060.0, 568.0, anchor="nw", text="3", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
+        self.gpio_img_3 = PhotoImage(file=cmn.get_test_path(self.type, "on.png"))
+        self.gpio_3 = self.canvas.create_image(1068.0, 659.0, image=self.gpio_img_3)
+
+        self.canvas.create_text(365.0, 743.0, anchor="nw", text="4", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
+        self.gpio_img_4 = PhotoImage(file=cmn.get_test_path(self.type, "on.png"))
+        self.gpio_4 = self.canvas.create_image(372.0, 835.0, image=self.gpio_img_4)
+
+        self.canvas.create_text(597.0, 743.0, anchor="nw", text="5", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
+        self.gpio_img_5 = PhotoImage(file=cmn.get_test_path(self.type, "on.png"))
+        self.gpio_5 = self.canvas.create_image(604.0, 835.0, image=self.gpio_img_5)
+
+        self.canvas.create_text(828.0, 743.0, anchor="nw", text="6", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
+        self.gpio_img_6 = PhotoImage(file=cmn.get_test_path(self.type, "on.png"))
+        self.gpio_6 = self.canvas.create_image(836.0, 835.0, image=self.gpio_img_6)
+
+        self.canvas.create_text(1060.0, 743.0, anchor="nw", text="7", fill="#FFFFFF", font=("Inter Medium", 24 * -1))
+        self.gpio_img_7 = PhotoImage(file=cmn.get_test_path(self.type, "on.png"))
+        self.gpio_7 = self.canvas.create_image(1068.0, 835.0, image=self.gpio_img_7)  
+    
+    def get_iterations_num(self):
+        return self.panel.entry.get()
     
     # Test
+    def run_automatic_test(self):
+        self.com = self.get_shrinked_com()
+        self.baudrate = self.get_shrinked_baudrate()
+        self.timeout = self.get_timeout()
+        self.iterations_num = self.get_iterations_num()
+               
+        if not any(self.panel.is_relay_selected):
+            messagebox.showerror("Error", "No relay has been selected")
+            return
+        
+        if not any(self.panel.is_gpio_selected):
+            messagebox.showerror("Error", "No GPIO has been selected")
+            return
+
+        print(self.iterations_num)
+        if self.iterations_num == '0' or not self.iterations_num.isdigit():
+            messagebox.showerror("Error", "Wrong iteration number")
+            return           
+
+        try:
+            self.serialPort = serial.Serial(self.com, self.baudrate, timeout = self.timeout)
+            if not cmn.init_system(self.serialPort):            
+                self.serialPort.close()
+                return
+            
+            print("Serial Communication Complete")
+            self.serialPort.close()
+            
+            if self.panel.negative_logic_var.get():
+                self.invert_gpios_init_condition()
+                           
+        except:
+            if self.com == "SelectCOM":
+                messagebox.showerror("Error", "COM not selected")
+            elif self.baudrate == "Select Baudrate":
+                messagebox.showerror("Error", "Baudrate not selected")
+            else:
+                messagebox.showerror("Error", "General Error")        
+            
     def run(self):
         self.mainwindow.mainloop()
     
 def on_btn_click(cover_window):
     cmn.clear_current_window(cover_window)
     panel = AutomaticTestPanel(cover_window)
-    test = AutomaticTestSection(cover_window)
+    test = AutomaticTestSection(cover_window, panel)
     panel.run()    
     test.run()

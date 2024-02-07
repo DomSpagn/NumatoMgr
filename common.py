@@ -95,7 +95,7 @@ def init_system(serialPort):
     if not are_gpios_off:
         messagebox.showerror("Error", "Cannot initialize GPIOs")
         return False
-
+           
     return True
 
 
