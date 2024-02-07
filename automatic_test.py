@@ -5,6 +5,7 @@ import common as cmn
 
 
 class AutomaticTestPanel:
+    # GUI
     def __init__(self, cover_window):
         self.mainwindow = cover_window
         self.type = 'auto'
@@ -105,7 +106,8 @@ class AutomaticTestPanel:
         self.save_button_img = PhotoImage(file=cmn.get_panel_path(self.type, "save.png"))
         self.save_button = Button(image=self.save_button_img, borderwidth=0, highlightthickness=0, command=self.load_iterations_num, relief="flat")
         self.save_button.place(x=275.0, y=963.0, width=24.0, height=24.0)
-        
+
+    # Manage relays
     def toggle_relay_1_img(self):
         self.current_relay_img_idx[0] = 1 - self.current_relay_img_idx[0]
         new_image = PhotoImage(file=self.img_paths_relay_1[self.current_relay_img_idx[0]])
@@ -298,12 +300,6 @@ class AutomaticTestPanel:
         self.button_relay_16 = Button(image=self.photo_var_relay_16, borderwidth=0, highlightthickness=0, command=self.toggle_relay_16_img, relief="flat")
         self.button_relay_16.place(x=285.0, y=426.0, width=30.0, height=30.0)
 
-    def set_negative_logic(self):
-        if not self.negative_logic_var.get():
-            print("Positive")
-        else:
-            print("Negative")
-
     def manage_all_relays(self):        
         if not self.relays_var.get():
             self.current_relay_img_idx = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -327,6 +323,7 @@ class AutomaticTestPanel:
         self.set_relay_15_button()
         self.set_relay_16_button()
 
+    # Manage GPIOs
     def toggle_gpio_0_img(self):
         self.current_gpio_img_idx[0] = 1 - self.current_gpio_img_idx[0]
         new_image = PhotoImage(file=self.img_paths_gpio_0[self.current_gpio_img_idx[0]])
@@ -423,6 +420,12 @@ class AutomaticTestPanel:
         self.button_gpio_7 = Button(image=self.photo_var_gpio_7, borderwidth=0, highlightthickness=0, command=self.toggle_gpio_7_img, relief="flat")
         self.button_gpio_7.place(x=170.0, y=747.0, width=36.0, height=36.0)
 
+    def set_negative_logic(self):
+        if not self.negative_logic_var.get():
+            print("Positive")
+        else:
+            print("Negative")
+
     def manage_all_gpios(self):        
         if not self.gpios_var.get():
             self.current_gpio_img_idx = [0, 0, 0, 0, 0, 0, 0, 0]
@@ -437,7 +440,8 @@ class AutomaticTestPanel:
         self.set_gpio_5_button()
         self.set_gpio_6_button()
         self.set_gpio_7_button()
-        
+    
+    # Manage iterations    
     def load_iterations_num(self):
         input = self.entry.get()
         if input.isdigit():
@@ -450,6 +454,7 @@ class AutomaticTestPanel:
 
         
 class AutomaticTestSection:
+    # GUI
     def __init__(self, cover_window):        
         self.mainwindow = cover_window
         self.type = "auto"
@@ -480,6 +485,9 @@ class AutomaticTestSection:
         self.quit_button = Button(image=self.quit_img, borderwidth=0, highlightthickness=0, command=lambda: cover_window.destroy(), relief="flat")
         self.quit_button.place(x=735.0 + self.shift, y=944.0, width=161.0, height=50.0)
 
+    # Callbacks
+    
+    # Test
     def run(self):
         self.mainwindow.mainloop()
     
