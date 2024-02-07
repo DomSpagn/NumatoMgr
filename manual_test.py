@@ -434,11 +434,8 @@ class ManualTestPanel:
         self.button_gpio_7.place(x=170.0, y=873.0, width=36.0, height=36.0)
 
     def set_negative_logic(self):
-        if not self.negative_logic_var.get():
-            print("Positive")
-        else:
-            print("Negative")
-
+        pass
+    
     def manage_all_gpios(self):        
         if not self.gpios_var.get():
             self.is_gpio_selected = [False] * 8
@@ -633,6 +630,7 @@ class ManualTestSection:
     
     # Test
     def run_manual_test(self):
+        # Check settings
         self.com = self.get_shrinked_com()
         self.baudrate = self.get_shrinked_baudrate()
         self.timeout = self.get_timeout()
@@ -663,6 +661,10 @@ class ManualTestSection:
                 messagebox.showerror("Error", "Baudrate not selected")
             else:
                 messagebox.showerror("Error", "General Error")
+        
+        # Test Execution
+        
+        
         
     def run(self):
         self.mainwindow.mainloop()
